@@ -6,6 +6,7 @@ dist/
 /tmp
 /out-tsc
 /docs/build
+bin/
 
 # Log file
 *.log
