@@ -1,13 +1,8 @@
 <div class="page-top clearfix" baScrollPosition maxHeight="50" (scrollChange)="scrolledChanged($event)"
      [ngClass]="{scrolled: isScrolled}">
-  <a routerLink="/pages/dashboard" class="al-logo clearfix"><span>Artic-</span>School</a>
+  <a routerLink="/pages/dashboard" class="al-logo clearfix"><span>Ceiba </span>Parking</a>
   <a href (click)="toggleMenu()" class="collapse-menu-link fa fa-bars"></a>
-
-  <div class="search">
-    <i class="fa fa-search" ng-click="startSearch()"></i>
-    <input id="searchInput" type="text" placeholder="Search for...">
-  </div>
-
+  
   <div class="user-profile clearfix">
     <div class="dropdown al-user-profile">
       <a class="profile-toggle-link dropdown-toggle" id="user-profile-dd" data-toggle="dropdown" aria-expanded="false">
@@ -19,6 +14,5 @@
         <li class="dropdown-item"><a (click)="logout()" class="signout"><i class="fa fa-power-off"></i>Sign out</a></li>
       </ul>
     </div>
-    <ba-msg-center></ba-msg-center>
   </div>
 </div>

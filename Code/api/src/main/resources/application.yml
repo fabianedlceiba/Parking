@@ -1,2 +1,30 @@
+spring:
+  application:
+    name: Parking Api
+  datasource:
+    url: jdbc:mysql://localhost:3306/parking?useSSL=false
+    username: root
+    password: admin
+    driver-class-name: com.mysql.jdbc.Driver
+    
+  jpa:
+    generate-ddl: true
+    show-sql: true
+    open-in-view: false
+    properties:
+      hibernate.generate_statistics: true
+    hibernate:
+      ddl-auto: create
+      use-new-id-generator-mappings: true
+logging:
+  file: logs/dev_app.log
+  pattern:
+    console: '%d %-5level %logger : %msg%n'
+    file: '%d %-5level [%thread] %logger : %msg%n'
+  level:
+    #org.springframework.web: debug
+    #org.springframework.controllers: debug
+    #org.hibernate: debug
+    com.ceiba: debug
 server:
   port: 8090
