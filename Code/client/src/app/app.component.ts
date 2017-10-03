@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
 
 declare const $: any;
 
@@ -10,7 +9,7 @@ declare const $: any;
 })
 export class AppComponent implements OnInit {
 
-  constructor(public location: Location) {}
+  constructor() {}
 
   ngOnInit() {
       $.material.options.autofill = true;

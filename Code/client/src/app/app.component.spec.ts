@@ -1,13 +1,25 @@
 import { TestBed, async } from '@angular/core/testing';
 
 import { AppComponent } from './app.component';
+import { ComponentsModule } from './components/components.module';
+import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
+import { RouterModule } from '@angular/router';
+import { AppRoutingModule } from './app.routing';
 
 describe('AppComponent', () => {
-  beforeEach(async(() => {
+  /*beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
         AppComponent
       ],
+      imports: [
+        ComponentsModule,
+        FormsModule,
+        HttpModule,
+        RouterModule,
+        AppRoutingModule
+      ]
     }).compileComponents();
   }));
 
@@ -28,5 +40,5 @@ describe('AppComponent', () => {
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
     expect(compiled.querySelector('h1').textContent).toContain('app works!');
-  }));
+  }));*/
 });
