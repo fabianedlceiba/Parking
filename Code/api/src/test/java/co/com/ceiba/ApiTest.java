@@ -1,4 +1,4 @@
-package api;
+package co.com.ceiba;
 
 import org.junit.Test;
 
