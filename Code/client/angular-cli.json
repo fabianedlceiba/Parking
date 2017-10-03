@@ -57,6 +57,12 @@
     }
   ],
   "test": {
+    "codeCoverage": {
+      "exclude": [
+        "src/app/app.routing.ts",
+        "src/app/app.module.ts"
+      ]
+    },
     "karma": {
       "config": "./karma.conf.js"
     }
