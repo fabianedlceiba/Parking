@@ -1,4 +1,4 @@
-package com.ceiba.parking.config;
+package co.com.ceiba.parking.config;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
@@ -14,11 +14,11 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@EnableJpaRepositories("com.ceiba.repositories")
+@EnableJpaRepositories("co.com.ceiba.repositories")
 @EnableTransactionManagement
 public class JpaConfig {
 
-  private static final String ENTITIES_PACKAGE = "com.ceiba.entities";
+  private static final String ENTITIES_PACKAGE = "co.com.ceiba.entities";
 
   @Bean()
   @ConfigurationProperties(prefix = "spring.datasource")
