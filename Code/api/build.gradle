@@ -13,6 +13,7 @@ buildscript {
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
+apply plugin: 'jacoco'
 
 group = 'co.com.ceiba'
 version = '0.0.1-SNAPSHOT'
@@ -20,6 +21,10 @@ sourceCompatibility = 1.8
 
 repositories {
 	mavenCentral()
+}
+
+springBoot {
+    mainClass = "co.com.ceiba.parking.ApiApplication"
 }
 
 
@@ -34,6 +39,13 @@ dependencies {
 	testCompile 'org.springframework.boot:spring-boot-starter-test'
 }
 
-springBoot {
-    mainClass = "co.com.ceiba.parking.ApiApplication"
+test {
+	jacoco {
+		append = false
+		destinationFile = file('jacoco/jacocoTest.exec')
+	}
+	reports.junitXml.destination = file('jacoco/test-results')
 }
+
+jacocoTestReport.dependsOn(test)
+
