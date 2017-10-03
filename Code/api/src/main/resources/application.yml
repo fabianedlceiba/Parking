@@ -6,7 +6,6 @@ spring:
     username: root
     password: admin
     driver-class-name: com.mysql.jdbc.Driver
-    
   jpa:
     generate-ddl: true
     show-sql: true
