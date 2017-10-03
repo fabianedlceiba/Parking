@@ -1,54 +1,30 @@
-import { Component, ViewContainerRef } from '@angular/core';
-import * as $ from 'jquery';
+import { Component, OnInit } from '@angular/core';
+import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
 
-import { GlobalState } from './global.state';
-import { BaImageLoaderService, BaThemePreloader, BaThemeSpinner } from './theme/services';
-import { BaThemeConfig } from './theme/theme.config';
-import { layoutPaths } from './theme/theme.constants';
+declare const $: any;
 
-/*
- * App Component
- * Top Level Component
- */
 @Component({
-  selector: 'app',
-  styleUrls: ['./app.component.scss'],
-  template: `
-    <main [class.menu-collapsed]="isMenuCollapsed" baThemeRun>
-      <div class="additional-bg"></div>
-      <router-outlet></router-outlet>
-    </main>
-  `,
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
 })
-export class App {
+export class AppComponent implements OnInit {
 
-  isMenuCollapsed: boolean = false;
+  constructor(public location: Location) {}
 
-  constructor(private _state: GlobalState,
-              private _imageLoader: BaImageLoaderService,
-              private _spinner: BaThemeSpinner,
-              private viewContainerRef: ViewContainerRef,
-              private themeConfig: BaThemeConfig) {
-
-    themeConfig.config();
-
-    this._loadImages();
-
-    this._state.subscribe('menu.isCollapsed', (isCollapsed) => {
-      this.isMenuCollapsed = isCollapsed;
-    });
+  ngOnInit() {
+      $.material.options.autofill = true;
+      $.material.init();
   }
 
-  public ngAfterViewInit(): void {
-    // hide spinner once all loaders are completed
-    BaThemePreloader.load().then((values) => {
-      this._spinner.hide();
-    });
-  }
-
-  private _loadImages(): void {
-    // register some loaders
-    BaThemePreloader.registerLoader(this._imageLoader.load('assets/img/sky-bg.jpg'));
-  }
-
+    isMaps(path){
+      var titlee = this.location.prepareExternalUrl(this.location.path());
+      titlee = titlee.slice( 1 );
+      if(path == titlee){
+        return false;
+      }
+      else {
+        return true;
+      }
+    }
 }

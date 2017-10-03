@@ -1,68 +1,174 @@
-[![Build Status](https://travis-ci.org/akveo/ng2-admin.svg?branch=master)](https://travis-ci.org/akveo/ng2-admin)
-[![Join the chat at https://gitter.im/ng2-admin/Lobby](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ng2-admin/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-[![Dependency Status](https://david-dm.org/akveo/ng2-admin/status.svg)](https://david-dm.org/akveo/ng2-admin)
+# [Material Dashboard Angular - Free Bootstrap Material Design Admin](https://www.creative-tim.com/product/material-dashboard-angular2)[![version][version-badge]][CHANGELOG]
 
-# Admin panel framework based on Angular, Bootstrap 4 and Angular CLI
+![alt text](http://s3.amazonaws.com/creativetim_bucket/products/53/original/opt_md_angular_thumbnail.jpg "Material Dashboard Angular Free")
 
-Admin template made with :heart:  by [Akveo team](http://akveo.com/). Follow us on [Twitter](https://twitter.com/akveo_inc) to get the latest news about this template first!
+**[Material Dashboard Angular](https://www.creative-tim.com/product/material-dashboard-angular2/)** is a free Material Bootstrap Admin with a fresh, new design inspired by Google's Material Design. We are very excited to introduce our take on the material concepts through an easy to use and beautiful set of components. Material Dashboard was built over the popular Bootstrap framework and it comes with a couple of third-party plugins redesigned to fit in with the rest of the elements.
 
-### Demo
+Material Dashboard makes use of light, surface and movement. The general layout resembles sheets of paper following multiple different layers, so that the depth and order is obvious. The navigation stays mainly on the left sidebar and the content is on the right inside the main panel.
 
-<a target="_blank" href="http://akveo.com/ng2-admin/"><img src="http://i.imgur.com/QK9AzHj.jpg" width="600" alt="Sky Blue"/></a>
+This product came as a result of users asking for a material dashboard after we released our successful [Material Kit](http://www.creative-tim.com/product/material-kit). We developed it based on your feedback and it is a powerful bootstrap admin dashboard, which allows you to build products like admin panels, content managements systems and CRMs.
 
-<a target="_blank" href="http://akveo.com/ng2-admin/">Live Demo</a>
+Material Dashboard comes with 5 color filter choices for both the sidebar and the card headers (blue, green, orange, red and purple) and an option to have a background image on the sidebar.
 
-## Angular 1.x version
-Here you can find Angular 1.x based version: [Blur Admin](http://akveo.github.io/blur-admin/)
- 
-## Documentation
-Installation, customization and other useful articles: https://akveo.github.io/ng2-admin/
+Material Dashboard uses a framework built by our friend [Federico - Bootstrap Material Design](http://fezvrasta.github.io/bootstrap-material-design/), who did an amazing job creating the backbone for the material effects, animations, ripples and transitions. Big thanks to his team for the effort and forward thinking they put into it.
 
-## Based on
-Angular 2+, Angular CLI, Bootstrap 4, and lots of awesome modules and plugins
+Special thanks go to:
+[Robert McIntosh](https://github.com/mouse0270/bootstrap-notify) for the notification system.
+[Chartist](https://gionkunz.github.io/chartist-js/) for the wonderful charts.
+We are very excited to share this dashboard with you and we look forward to hearing your feedback!
 
-## ngx-admin-next
-The next major release is under development in https://github.com/akveo/ng2-admin/tree/ngx-admin branch.
+You can find the Github Repo here.
 
-## BrowserStack
-This project runs its tests on multiple desktop and mobile browsers using [BrowserStack](http://www.browserstack.com).
+## Links:
 
-<img src="https://cloud.githubusercontent.com/assets/131406/22254249/534d889e-e254-11e6-8427-a759fb23b7bd.png" height="40" />
++ [Live Preview](https://www.creative-tim.com/product/material-dashboard-angular2)
++ [Material Kit - For Front End Development](http://www.creative-tim.com/product/material-kit?ref=github-md-angular)
 
-## How can I support developers?
-- Star our GitHub repo :star:
-- Create pull requests, submit bugs, suggest new features or documentation updates :wrench:
-- Follow us on [Twitter](https://twitter.com/akveo_inc) :feet:
-- Like our page on [Facebook](https://www.facebook.com/akveo/) :thumbsup:
+## Quick start
 
-## Can I hire you guys?
-Yes!  Visit [our homepage](http://akveo.com/) or simply leave us a message to [contact@akveo.com](mailto:contact@akveo.com). We will be happy to work with you!
+Quick start options:
 
-## Features
-* TypeScript
-* Webpack
-* Responsive layout
-* High resolution
-* Bootstrap 4 CSS Framework
-* Sass
-* Angular
-* jQuery
-* Charts (Chartist, Chart.js)
-* Maps (Google, Leaflet, amMap)
-* and many more!
+- [Download from Github](https://github.com/tiniestory/material-dashboard-angular/archive/master.zip).
+- [Download from Creative Tim](http://www.creative-tim.com/product/material-dashboard-angular2).
+- Clone the repo: `git clone https://github.com/tiniestory/material-dashboard-angular.git`.
 
-## License
-[MIT](LICENSE.txt) license.
+## Terminal Commands
 
-## Special thanks to our awesome contributors!
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0 and angular 4.x.
 
-[<img alt="nnixaa" src="https://avatars0.githubusercontent.com/u/230527?v=3&s=60" width="60">](https://github.com/nnixaa)[<img alt="lexzhukov" src="https://avatars0.githubusercontent.com/u/12192373?v=3&s=60" width="60">](https://github.com/lexzhukov)[<img alt="smartapant" src="https://avatars3.githubusercontent.com/u/3674348?v=3&s=60" width="60">](https://github.com/smartapant)[<img alt="Tibing" src="https://avatars2.githubusercontent.com/u/17410089?v=3&s=60" width="60">](https://github.com/Tibing)[<img alt="ESadouski" src="https://avatars3.githubusercontent.com/u/9255839?v=3&s=60" width="60">](https://github.com/ESadouski)[<img alt="hryb" src="https://avatars3.githubusercontent.com/u/24896429?v=3&s=60" width="60">](https://github.com/hryb)[<img alt="AlbertXingZhang" src="https://avatars3.githubusercontent.com/u/12808025?v=3&s=60" width="60">](https://github.com/AlbertXingZhang)[<img alt="iamdavidfrancis" src="https://avatars2.githubusercontent.com/u/539365?v=3&s=60" width="60">](https://github.com/iamdavidfrancis)[<img alt="Gelio" src="https://avatars3.githubusercontent.com/u/889383?v=3&s=60" width="60">](https://github.com/Gelio)[<img alt="ramsunvtech" src="https://avatars1.githubusercontent.com/u/1652629?v=3&s=60" width="60">](https://github.com/ramsunvtech)[<img alt="GRoguelon" src="https://avatars2.githubusercontent.com/u/309354?v=3&s=60" width="60">](https://github.com/GRoguelon)[<img alt="lugovsky" src="https://avatars3.githubusercontent.com/u/2788046?v=3&s=60" width="60">](https://github.com/lugovsky)[<img alt="kaleguy" src="https://avatars3.githubusercontent.com/u/1402176?v=3&s=60" width="60">](https://github.com/kaleguy)[<img alt="KostyaDanovsky" src="https://avatars3.githubusercontent.com/u/773632?v=3&s=60" width="60">](https://github.com/KostyaDanovsky)
+1. Install NodeJs from [NodeJs Official Page](https://nodejs.org/en).
+2. Open Terminal
+3. Go to your file project
+4. Make sure you have installed [Angular CLI](https://github.com/angular/angular-cli) already. If not, please install.
+5. Run in terminal: ```npm install```
+6. Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-[<img alt="RonnyRoos" src="https://avatars2.githubusercontent.com/u/6583791?v=3&s=60" width="60">](https://github.com/RonnyRoos)[<img alt="gavinzhou" src="https://avatars2.githubusercontent.com/u/240780?v=3&s=60" width="60">](https://github.com/gavinzhou)[<img alt="kbrandwijk" src="https://avatars2.githubusercontent.com/u/852069?v=3&s=60" width="60">](https://github.com/kbrandwijk)[<img alt="stacyakveo" src="https://avatars2.githubusercontent.com/u/27723447?v=3&s=60" width="60">](https://github.com/stacyakveo)[<img alt="Awk34" src="https://avatars1.githubusercontent.com/u/5545474?v=3&s=60" width="60">](https://github.com/Awk34)[<img alt="pritambaral" src="https://avatars1.githubusercontent.com/u/1378718?v=3&s=60" width="60">](https://github.com/pritambaral)[<img alt="shootermv" src="https://avatars3.githubusercontent.com/u/1336862?v=3&s=60" width="60">](https://github.com/shootermv)[<img alt="tgabi333" src="https://avatars0.githubusercontent.com/u/187022?v=3&s=60" width="60">](https://github.com/tgabi333)[<img alt="Kaizeras" src="https://avatars0.githubusercontent.com/u/6340189?v=3&s=60" width="60">](https://github.com/Kaizeras)[<img alt="mterwoord" src="https://avatars1.githubusercontent.com/u/114143?v=3&s=60" width="60">](https://github.com/mterwoord)[<img alt="michaeljota" src="https://avatars3.githubusercontent.com/u/10507776?v=3&s=60" width="60">](https://github.com/michaeljota)[<img alt="nstanard" src="https://avatars2.githubusercontent.com/u/4204806?v=3&s=60" width="60">](https://github.com/nstanard)[<img alt="myadhdoutlet" src="https://avatars0.githubusercontent.com/u/18659465?v=3&s=60" width="60">](https://github.com/myadhdoutlet)[<img alt="smith64fx" src="https://avatars0.githubusercontent.com/u/3246782?v=3&s=60" width="60">](https://github.com/smith64fx)
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 
-[<img alt="swaheed2" src="https://avatars1.githubusercontent.com/u/8592912?v=3&s=60" width="60">](https://github.com/swaheed2)[<img alt="susovan87" src="https://avatars0.githubusercontent.com/u/1897814?v=3&s=60" width="60">](https://github.com/susovan87)[<img alt="ThomasDupuis" src="https://avatars2.githubusercontent.com/u/1278762?v=3&s=60" width="60">](https://github.com/ThomasDupuis)[<img alt="turnerguo" src="https://avatars3.githubusercontent.com/u/633880?v=3&s=60" width="60">](https://github.com/turnerguo)[<img alt="anhuisunfei" src="https://avatars0.githubusercontent.com/u/5771096?v=3&s=60" width="60">](https://github.com/anhuisunfei)[<img alt="blackholegalaxy" src="https://avatars3.githubusercontent.com/u/11064123?v=3&s=60" width="60">](https://github.com/blackholegalaxy)[<img alt="bnayalivne" src="https://avatars0.githubusercontent.com/u/20381085?v=3&s=60" width="60">](https://github.com/bnayalivne)[<img alt="dimkk" src="https://avatars0.githubusercontent.com/u/4674044?v=3&s=60" width="60">](https://github.com/dimkk)[<img alt="geekow" src="https://avatars2.githubusercontent.com/u/12011794?v=3&s=60" width="60">](https://github.com/geekow)[<img alt="greenkeeperio-bot" src="https://avatars2.githubusercontent.com/u/14790466?v=3&s=60" width="60">](https://github.com/greenkeeperio-bot)[<img alt="pluswave" src="https://avatars0.githubusercontent.com/u/5653443?v=3&s=60" width="60">](https://github.com/pluswave)[<img alt="Guutong" src="https://avatars3.githubusercontent.com/u/10181975?v=3&s=60" width="60">](https://github.com/Guutong)[<img alt="Deilan" src="https://avatars1.githubusercontent.com/u/4777512?v=3&s=60" width="60">](https://github.com/Deilan)
+### What's included
 
-### From akveo
+Within the download you'll find the following directories and files:
 
-Enjoy :metal:
-We're always happy to receive your feedback!
+```
+md-free-angular-cli
+├── CHANGELOG.md
+├── LICENSE.md
+├── README.md
+├── angular-cli.json
+├── documentation
+├── e2e
+├── karma.conf.js
+├── package.json
+├── protractor.conf.js
+├── src
+│   ├── app
+│   │   ├── app.component.css
+│   │   ├── app.component.html
+│   │   ├── app.component.spec.ts
+│   │   ├── app.component.ts
+│   │   ├── app.module.ts
+│   │   ├── app.routing.ts
+│   │   ├── components
+│   │   │   ├── components.module.ts
+│   │   │   ├── footer
+│   │   │   │   ├── footer.component.css
+│   │   │   │   ├── footer.component.html
+│   │   │   │   ├── footer.component.spec.ts
+│   │   │   │   └── footer.component.ts
+│   │   │   ├── navbar
+│   │   │   │   ├── navbar.component.css
+│   │   │   │   ├── navbar.component.html
+│   │   │   │   ├── navbar.component.spec.ts
+│   │   │   │   └── navbar.component.ts
+│   │   │   └── sidebar
+│   │   │       ├── sidebar.component.css
+│   │   │       ├── sidebar.component.html
+│   │   │       ├── sidebar.component.spec.ts
+│   │   │       └── sidebar.component.ts
+│   │   ├── dashboard
+│   │   │   ├── dashboard.component.css
+│   │   │   ├── dashboard.component.html
+│   │   │   ├── dashboard.component.spec.ts
+│   │   │   └── dashboard.component.ts
+│   │   ├── icons
+│   │   │   ├── icons.component.css
+│   │   │   ├── icons.component.html
+│   │   │   ├── icons.component.spec.ts
+│   │   │   └── icons.component.ts
+│   │   ├── maps
+│   │   │   ├── maps.component.css
+│   │   │   ├── maps.component.html
+│   │   │   ├── maps.component.spec.ts
+│   │   │   └── maps.component.ts
+│   │   ├── notifications
+│   │   │   ├── notifications.component.css
+│   │   │   ├── notifications.component.html
+│   │   │   ├── notifications.component.spec.ts
+│   │   │   └── notifications.component.ts
+│   │   ├── table-list
+│   │   │   ├── table-list.component.css
+│   │   │   ├── table-list.component.html
+│   │   │   ├── table-list.component.spec.ts
+│   │   │   └── table-list.component.ts
+│   │   ├── typography
+│   │   │   ├── typography.component.css
+│   │   │   ├── typography.component.html
+│   │   │   ├── typography.component.spec.ts
+│   │   │   └── typography.component.ts
+│   │   ├── upgrade
+│   │   │   ├── upgrade.component.css
+│   │   │   ├── upgrade.component.html
+│   │   │   ├── upgrade.component.spec.ts
+│   │   │   └── upgrade.component.ts
+│   │   └── user-profile
+│   │       ├── user-profile.component.css
+│   │       ├── user-profile.component.html
+│   │       ├── user-profile.component.spec.ts
+│   │       └── user-profile.component.ts
+│   ├── assets
+│   │   ├── css
+│   │   ├── img
+│   │   └── sass
+│   │       ├── material-dashboard.scss
+│   │       └── md
+│   ├── environments
+│   ├── favicon.ico
+│   ├── index.html
+│   ├── main.ts
+│   ├── polyfills.ts
+│   ├── styles.css
+│   ├── test.ts
+│   ├── tsconfig.app.json
+│   ├── tsconfig.spec.json
+│   └── typings.d.ts
+├── tsconfig.json
+├── tslint.json
+└── typings
+
+```
+
+## Useful Links
+
+More products from Creative Tim: <http://www.creative-tim.com/bootstrap-themes>
+
+Tutorials: <https://www.youtube.com/channel/UCVyTG4sCw-rOvB9oHkzZD1w>
+
+Freebies: <http://www.creative-tim.com/products>
+
+Affiliate Program (earn money): <http://www.creative-tim.com/affiliates/new>
+
+Social Media:
+
+Twitter: <https://twitter.com/CreativeTim>
+
+Facebook: <https://www.facebook.com/CreativeTim>
+
+Dribbble: <https://dribbble.com/creativetim>
+
+Google+: <https://plus.google.com/+CreativetimPage>
+
+Instagram: <https://instagram.com/creativetimofficial>
+
+[CHANGELOG]: ./CHANGELOG.md
+
+[version-badge]: https://img.shields.io/badge/version-1.4.1-blue.svg

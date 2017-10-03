@@ -1,84 +1,45 @@
-import { NgModule, ApplicationRef } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { TranslateService } from '@ngx-translate/core';
 
-import { RestangularModule, Restangular } from 'ngx-restangular';
+import { AppRoutingModule } from './app.routing';
+import { ComponentsModule } from './components/components.module';
 
-/*
- * Platform and Environment providers/directives/pipes
- */
-import { routing } from './app.routing';
+import { AppComponent } from './app.component';
 
-// App is our top level component
-import { App } from './app.component';
-import { AppState, InternalStateType } from './app.service';
-import { GlobalState } from './global.state';
-import { NgaModule } from './theme/nga.module';
-import { PagesModule } from './pages/pages.module';
-import { environment } from '../environments/environment';
-import { SharedModule } from './shared/shared.module';
-import { AuthService } from './shared/services';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { TableListComponent } from './table-list/table-list.component';
+import { TypographyComponent } from './typography/typography.component';
+import { IconsComponent } from './icons/icons.component';
+import { MapsComponent } from './maps/maps.component';
+import { NotificationsComponent } from './notifications/notifications.component';
+import { UpgradeComponent } from './upgrade/upgrade.component';
 
-// Application wide providers
-const APP_PROVIDERS = [
-  AppState,
-  GlobalState,
-];
-
-export type StoreType = {
-  state: InternalStateType,
-  restoreInputValues: () => void,
-  disposeOldHosts: () => void,
-};
-
-
-export function RestangularConfigFactory (restangularProvider: any, authService: AuthService) {
-  restangularProvider.setDefaultHeaders({ 'Accept': 'application/json' });
-  restangularProvider.setBaseUrl(environment.urlApi);
-
-// by each request to the server receive a token and update headers with it
-  restangularProvider.addFullRequestInterceptor((element, operation, path, url, headers, params) => {
-    const bearerToken = authService.getAccessToken;
-      
-    return {
-      headers: Object.assign({}, headers, { Authorization: `Bearer ${bearerToken}` }),
-    };
-  });
-
-}
-
-/**
- * `AppModule` is the main entry point into Angular2's bootstraping process
- */
 @NgModule({
-  bootstrap: [App],
   declarations: [
-    App,
+    AppComponent,
+    DashboardComponent,
+    UserProfileComponent,
+    TableListComponent,
+    TypographyComponent,
+    IconsComponent,
+    MapsComponent,
+    NotificationsComponent,
+    UpgradeComponent,
+
   ],
-  imports: [ // import Angular's modules
+  imports: [
     BrowserModule,
-    HttpModule,
-    RouterModule,
     FormsModule,
-    ReactiveFormsModule,
-    NgaModule.forRoot(),
-    NgbModule.forRoot(),
-    PagesModule,
-    routing,
-    SharedModule,
-    RestangularModule.forRoot([AuthService], RestangularConfigFactory),
+    HttpModule,
+    ComponentsModule,
+RouterModule,
+    AppRoutingModule
   ],
-  providers: [ // expose our Services and Providers into Angular's dependency injection
-    APP_PROVIDERS,
-  ],
+  providers: [],
+  bootstrap: [AppComponent]
 })
-
-export class AppModule {
-
-  constructor(public appState: AppState) {
-  }
-}
+export class AppModule { }
