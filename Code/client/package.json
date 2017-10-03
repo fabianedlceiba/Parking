@@ -3,12 +3,15 @@
   "version": "1.4.1",
   "license": "MIT",
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
+    "ng": "node_modules/.bin/ng",
+    "start": "yarn run ng serve",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "clean:dist": "yarn run rimraf -- dist",
+    "build": "npm run clean:dist && yarn run ng build",
+    "build:prod": "npm run build -- --prod",
+    "build:prod:aot": "npm run build:prod -- --aot"
   },
   "private": true,
   "dependencies": {
