@@ -21,8 +21,13 @@ public class CarParkController {
   private CarParkService carParkService;
 
   @PostMapping(path = "/park")
-  public ResponseEntity<Long> parkVehicle(@Valid @RequestBody CarPark carPark) {
-    long carParkRe = carParkService.park(carPark);
+  public ResponseEntity<CarPark> parkVehicle(@Valid @RequestBody CarPark carPark) {
+
+    if (carPark == null) {
+      throw new IllegalArgumentException("El parámetro no puede ser nulo.");
+    }
+
+    CarPark carParkRe = carParkService.park(carPark);
     return new ResponseEntity<>(carParkRe, HttpStatus.CREATED);
   }
 

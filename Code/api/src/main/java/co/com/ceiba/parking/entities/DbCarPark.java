@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Type;
+
 import co.com.ceiba.parking.enums.EVehicleType;
 
 @Entity
@@ -28,9 +30,11 @@ public class DbCarPark implements Serializable {
   private DbVehicle vehicle;
 
   @Column(name = "EntryDate", nullable = false)
+  @Type(type = "org.hibernate.type.LocalDateTimeType")
   private LocalDateTime entryDate;
 
   @Column(name = "ExitDate")
+  @Type(type = "org.hibernate.type.LocalDateTimeType")
   private LocalDateTime exitDate;
 
   @Column(name = "SlotNumber", nullable = false)
@@ -40,6 +44,10 @@ public class DbCarPark implements Serializable {
   private String notes;
 
   public DbCarPark() {
+  }
+
+  public DbCarPark(long id) {
+    this.id = id;
   }
 
   public DbCarPark(String plate, EVehicleType type, LocalDateTime entryDate, short slotNumber) {

@@ -28,7 +28,8 @@ public final class CarPark {
   public CarPark() {
   }
 
-  public CarPark(String plate, EVehicleType type) {
+  public CarPark(String plate, EVehicleType type, LocalDateTime entryDate) {
+    this.entryDate = entryDate;
     this.vehicle = new Vehicle(plate, type);
   }
 
@@ -87,7 +88,14 @@ public final class CarPark {
    */
   @JsonIgnore
   public DbCarPark toEntity() {
-    return new DbCarPark();
+    DbCarPark dbCarPark = new DbCarPark();
+    dbCarPark.setId(getId());
+    dbCarPark.setVehicle(getVehicle() == null ? null : getVehicle().toEntity());
+    dbCarPark.setEntryDate(getEntryDate());
+    dbCarPark.setExitDate(getExitDate());
+    dbCarPark.setSlotNumber(getSlotNumber());
+    dbCarPark.setNotes(getNotes());
+    return dbCarPark;
   }
 
   /**

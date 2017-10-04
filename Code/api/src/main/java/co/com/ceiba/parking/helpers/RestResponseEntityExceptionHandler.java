@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class RestResponseEntityExceptionHandler {
 
   @ExceptionHandler(MethodArgumentNotValidException.class)
-  public ResponseEntity<String> handleException(MethodArgumentNotValidException ex) {
+  public ResponseEntity<List<String>> handleException(MethodArgumentNotValidException ex) {
     List<String> errors = ex.getBindingResult().getAllErrors().stream().map(ObjectError::getDefaultMessage).collect(toList());
-    return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+    return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
   }
 }

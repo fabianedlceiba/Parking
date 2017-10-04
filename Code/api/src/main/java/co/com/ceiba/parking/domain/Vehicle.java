@@ -1,7 +1,5 @@
 package co.com.ceiba.parking.domain;
 
-import org.hibernate.validator.constraints.NotBlank;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import co.com.ceiba.parking.entities.DbVehicle;
@@ -9,9 +7,7 @@ import co.com.ceiba.parking.enums.EVehicleType;
 
 public final class Vehicle {
 
-  @NotBlank
   private String plate;
-
   private EVehicleType type;
   private Short cylinder;
 

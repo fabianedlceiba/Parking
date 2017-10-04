@@ -1,7 +1,7 @@
 package co.com.ceiba.parking.repositories;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -15,6 +15,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import co.com.ceiba.parking.builders.DbCarParkBuilder;
 import co.com.ceiba.parking.entities.DbCarPark;
 import co.com.ceiba.parking.enums.EVehicleType;
 
@@ -45,14 +46,12 @@ public class CarParkRepositoryTest {
   @Test
   public void whenCountParkCars_thenReturnNumberCars() {
 
-    final String plate = "RMS34D";
-    final EVehicleType carType = EVehicleType.CAR;
+    DbCarPark entity = new DbCarParkBuilder().withCar("RMS34D").build();
+    entityManager.persist(entity);
 
-    entityManager.persist(new DbCarPark(plate, carType, LocalDateTime.now(), (short) 1));
+    int count = carParkRepository.countByVehicleTypeAndExitDateIsNull(entity.getVehicle().getType());
 
-    int count = carParkRepository.countByVehicleTypeAndExitDateIsNull(carType);
-
-    assertTrue(count == 1);
+    assertEquals(count, 1);
   }
 
   @Test
@@ -65,7 +64,7 @@ public class CarParkRepositoryTest {
 
     int count = carParkRepository.countByVehicleTypeAndExitDateIsNull(carType);
 
-    assertTrue(count == 1);
+    assertEquals(count, 1);
   }
 
 }

@@ -1,7 +1,7 @@
 package co.com.ceiba.parking.services.impl;
 
 import java.time.DayOfWeek;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,9 +24,11 @@ public class CarParkServiceImpl implements CarParkService {
   private CarParkRepository carParkRepository;
 
   @Override
-  public long park(CarPark carpark) {
+  public CarPark park(CarPark carpark) {
 
-    DayOfWeek day = LocalDate.now().getDayOfWeek();
+    LocalDateTime now = carpark.getEntryDate();
+
+    DayOfWeek day = now.getDayOfWeek();
 
     Vehicle vehicle = carpark.getVehicle();
 
@@ -44,10 +46,9 @@ public class CarParkServiceImpl implements CarParkService {
       throw new LimitExceededException("El parqueadero ya está lleno para motos.");
     }
 
-    DbCarPark entity = carpark.toEntity();
-    carParkRepository.save(entity);
-
-    return entity.getId();
+    DbCarPark entity = carParkRepository.save(carpark.toEntity());
+    carpark.setId(entity.getId());
+    return carpark;
   }
 
   @Override

@@ -4,7 +4,7 @@ import co.com.ceiba.parking.domain.CarPark;
 
 public interface CarParkService {
 
-  long park(CarPark carpark);
+  CarPark park(CarPark carpark);
 
   boolean unPark();
 
