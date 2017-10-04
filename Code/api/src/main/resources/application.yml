@@ -23,7 +23,8 @@ logging:
   level:
     #org.springframework.web: debug
     #org.springframework.controllers: debug
-    #org.hibernate: debug
+    org.hibernate: debug
     com.ceiba: debug
 server:
   port: 8090
+  context-path: /api

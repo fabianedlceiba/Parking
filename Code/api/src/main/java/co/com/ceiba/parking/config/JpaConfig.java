@@ -14,11 +14,11 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@EnableJpaRepositories("co.com.ceiba.repositories")
+@EnableJpaRepositories("co.com.ceiba.parking.repositories")
 @EnableTransactionManagement
 public class JpaConfig {
 
-  private static final String ENTITIES_PACKAGE = "co.com.ceiba.entities";
+  private static final String ENTITIES_PACKAGE = "co.com.ceiba.parking.entities";
 
   @Bean()
   @ConfigurationProperties(prefix = "spring.datasource")
