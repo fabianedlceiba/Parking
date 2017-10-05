@@ -13,8 +13,6 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
 
-import co.com.ceiba.parking.enums.EVehicleType;
-
 @Entity
 @Table(name = "Car_Park")
 public class DbCarPark implements Serializable {
@@ -42,19 +40,6 @@ public class DbCarPark implements Serializable {
 
   @Column(name = "Notes", length = 100)
   private String notes;
-
-  public DbCarPark() {
-  }
-
-  public DbCarPark(long id) {
-    this.id = id;
-  }
-
-  public DbCarPark(String plate, EVehicleType type, LocalDateTime entryDate, short slotNumber) {
-    this.entryDate = entryDate;
-    this.slotNumber = slotNumber;
-    this.vehicle = new DbVehicle(plate, type);
-  }
 
   public long getId() {
     return id;

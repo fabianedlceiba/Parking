@@ -18,7 +18,7 @@ public interface CarParkRepository extends CrudRepository<DbCarPark, Long> {
    *          Plate of the vehicle.
    * @return Information about park of the vehicle.
    */
-  Optional<DbCarPark> findByVehiclePlate(String plate);
+  Optional<DbCarPark> findByVehiclePlateAndExitDateIsNull(String plate);
 
   /**
    * Count the vehicles parks.

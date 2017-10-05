@@ -35,6 +35,11 @@ public final class DbCarParkBuilder {
     return this;
   }
 
+  public DbCarParkBuilder withMotorcycle(String plate) {
+    this.vehicle = new DbVehicle(plate, EVehicleType.MOTORCYCLE);
+    return this;
+  }
+
   public DbCarParkBuilder withMotorcycle(String plate, Short cylinder) {
     this.vehicle = new DbVehicle(plate, EVehicleType.MOTORCYCLE);
     this.vehicle.setCylinder(cylinder);

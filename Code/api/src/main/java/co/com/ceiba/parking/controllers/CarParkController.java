@@ -1,5 +1,7 @@
 package co.com.ceiba.parking.controllers;
 
+import java.time.LocalDateTime;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +25,7 @@ public class CarParkController {
   @PostMapping(path = "/park")
   public ResponseEntity<CarPark> parkVehicle(@Valid @RequestBody CarPark carPark) {
 
-    if (carPark == null) {
-      throw new IllegalArgumentException("El parámetro no puede ser nulo.");
-    }
-
+    carPark.setEntryDate(LocalDateTime.now());
     CarPark carParkRe = carParkService.park(carPark);
     return new ResponseEntity<>(carParkRe, HttpStatus.CREATED);
   }

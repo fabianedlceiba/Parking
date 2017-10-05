@@ -6,6 +6,4 @@ public interface CarParkService {
 
   CarPark park(CarPark carpark);
 
-  boolean unPark();
-
 }

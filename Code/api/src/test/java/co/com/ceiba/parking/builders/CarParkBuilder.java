@@ -21,14 +21,25 @@ public final class CarParkBuilder {
   private short slotNumber;
   private String notes;
 
+  public CarParkBuilder withMotorcycle(String plate) {
+    this.vehicle = new Vehicle();
+    this.vehicle.setPlate(plate);
+    this.vehicle.setType(EVehicleType.MOTORCYCLE);
+    return this;
+  }
+
   public CarParkBuilder withMotorcycle(String plate, Short cylinder) {
-    this.vehicle = new Vehicle(plate, EVehicleType.MOTORCYCLE);
+    this.vehicle = new Vehicle();
+    this.vehicle.setPlate(plate);
+    this.vehicle.setType(EVehicleType.MOTORCYCLE);
     this.vehicle.setCylinder(cylinder);
     return this;
   }
 
   public CarParkBuilder withCar(String plate) {
-    this.vehicle = new Vehicle(plate, EVehicleType.CAR);
+    this.vehicle = new Vehicle();
+    this.vehicle.setPlate(plate);
+    this.vehicle.setType(EVehicleType.CAR);
     return this;
   }
 

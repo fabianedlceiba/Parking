@@ -5,10 +5,11 @@ package co.com.ceiba.parking.domain;
 
 import java.time.LocalDateTime;
 
+import javax.validation.constraints.NotNull;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import co.com.ceiba.parking.entities.DbCarPark;
-import co.com.ceiba.parking.enums.EVehicleType;
 
 /**
  * Domain bean of the entity {@link DbCarPark}.
@@ -19,19 +20,13 @@ import co.com.ceiba.parking.enums.EVehicleType;
 public final class CarPark {
 
   private long id;
+
+  @NotNull(message = "El vehiculo no puede ser nulo")
   private Vehicle vehicle;
   private LocalDateTime entryDate;
   private LocalDateTime exitDate;
   private short slotNumber;
   private String notes;
-
-  public CarPark() {
-  }
-
-  public CarPark(String plate, EVehicleType type, LocalDateTime entryDate) {
-    this.entryDate = entryDate;
-    this.vehicle = new Vehicle(plate, type);
-  }
 
   public long getId() {
     return id;

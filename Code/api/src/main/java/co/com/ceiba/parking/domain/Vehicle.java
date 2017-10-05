@@ -1,5 +1,7 @@
 package co.com.ceiba.parking.domain;
 
+import javax.validation.constraints.NotNull;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import co.com.ceiba.parking.entities.DbVehicle;
@@ -7,17 +9,11 @@ import co.com.ceiba.parking.enums.EVehicleType;
 
 public final class Vehicle {
 
+  @NotNull(message = "La placa no puede ser nula.")
   private String plate;
+  @NotNull(message = "El tipo de vehiculo no puede ser nulo.")
   private EVehicleType type;
   private Short cylinder;
-
-  public Vehicle() {
-  }
-
-  public Vehicle(String plate, EVehicleType type) {
-    this.plate = plate;
-    this.type = type;
-  }
 
   public String getPlate() {
     return plate;
@@ -52,6 +48,7 @@ public final class Vehicle {
     return dbVehicle;
   }
 
+  @JsonIgnore
   public void fromEntity(DbVehicle entity) {
     setPlate(entity.getPlate());
     setType(entity.getType());

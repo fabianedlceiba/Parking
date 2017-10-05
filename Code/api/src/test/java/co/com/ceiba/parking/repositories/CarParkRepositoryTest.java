@@ -1,9 +1,7 @@
 package co.com.ceiba.parking.repositories;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertEquals;
 
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 import org.junit.Test;
@@ -17,7 +15,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import co.com.ceiba.parking.builders.DbCarParkBuilder;
 import co.com.ceiba.parking.entities.DbCarPark;
-import co.com.ceiba.parking.enums.EVehicleType;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest(showSql = true)
@@ -33,38 +30,39 @@ public class CarParkRepositoryTest {
   @Test
   public void whenFindByVehiclePlate_thenReturnCarPark() {
 
-    final String plate = "RMS34D";
+    DbCarPark entity = new DbCarParkBuilder().withCar("RMS34D").build();
+    entityManager.persist(entity);
 
-    entityManager.persist(new DbCarPark(plate, EVehicleType.CAR, LocalDateTime.now(), (short) 1));
+    Optional<DbCarPark> foundCarPark = carParkRepository.findByVehiclePlateAndExitDateIsNull(entity.getVehicle().getPlate());
 
-    Optional<DbCarPark> foundCarPark = carParkRepository.findByVehiclePlate(plate);
-
-    foundCarPark.ifPresent(car -> assertThat(car.getVehicle().getPlate()).isEqualTo(plate));
+    foundCarPark.ifPresent(car -> assertThat(car.getVehicle().getPlate()).isEqualTo(entity.getVehicle().getPlate()));
 
   }
 
   @Test
   public void whenCountParkCars_thenReturnNumberCars() {
-
+    // Arrange
     DbCarPark entity = new DbCarParkBuilder().withCar("RMS34D").build();
     entityManager.persist(entity);
 
+    // Act
     int count = carParkRepository.countByVehicleTypeAndExitDateIsNull(entity.getVehicle().getType());
 
-    assertEquals(count, 1);
+    // Assert
+    assertThat(count).isEqualTo(1);
   }
 
   @Test
   public void whenCountParkMotorcycle_thenReturnNumberCars() {
+    // Arrange
+    DbCarPark entity = new DbCarParkBuilder().withMotorcycle("RMS34E").build();
+    entityManager.persist(entity);
 
-    final String plate = "RMS34C";
-    final EVehicleType carType = EVehicleType.MOTORCYCLE;
+    // Act
+    int count = carParkRepository.countByVehicleTypeAndExitDateIsNull(entity.getVehicle().getType());
 
-    entityManager.persist(new DbCarPark(plate, carType, LocalDateTime.now(), (short) 1));
-
-    int count = carParkRepository.countByVehicleTypeAndExitDateIsNull(carType);
-
-    assertEquals(count, 1);
+    // Assert
+    assertThat(count).isEqualTo(1);
   }
 
 }

@@ -38,7 +38,10 @@ dependencies {
 	runtime 'mysql:mysql-connector-java'
 	
 	testRuntime 'com.h2database:h2'
-	testCompile 'org.springframework.boot:spring-boot-starter-test'
+	testCompile ("org.springframework.boot:spring-boot-starter-test") {
+		exclude group: 'org.assertj'
+	}
+	testCompile 'org.assertj:assertj-core:3.8.0'
 }
 
 test {
