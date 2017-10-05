@@ -29,14 +29,15 @@ public class CarParkRepositoryTest {
 
   @Test
   public void whenFindByVehiclePlate_thenReturnCarPark() {
-
+    // Arrange
     DbCarPark entity = new DbCarParkBuilder().withCar("RMS34D").build();
     entityManager.persist(entity);
 
+    // Act
     Optional<DbCarPark> foundCarPark = carParkRepository.findByVehiclePlateAndExitDateIsNull(entity.getVehicle().getPlate());
 
-    foundCarPark.ifPresent(car -> assertThat(car.getVehicle().getPlate()).isEqualTo(entity.getVehicle().getPlate()));
-
+    // Assert
+    assertThat(foundCarPark).isPresent();
   }
 
   @Test

@@ -55,12 +55,9 @@ public class CarParkControllerTest {
 
     //@formatter:off
     mvc.perform(post("/vehicles/park").contentType(APPLICATION_JSON).content("{}"))
-                                      .andExpect(status().isBadRequest());
+                                      .andExpect(status().isUnprocessableEntity());
     
     //@formatter:on
-
-    // .andExpect(jsonPath("$", hasSize(1))).andExpect(jsonPath("$[0].name",
-    // is("")));
 
   }
 

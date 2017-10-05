@@ -38,7 +38,7 @@ public class CarParkControllerIntTest {
   private CarParkRepository repository;
 
   @Test
-  public void t() throws IOException, Exception {
+  public void givenNewCarPark_whenCarPark_thenStatusCreated() throws IOException, Exception {
     // Arrange
     CarPark carPark = new CarParkBuilder().withCar("RDF23D").build();
 
@@ -53,7 +53,8 @@ public class CarParkControllerIntTest {
     //@formatter:on
     Optional<DbCarPark> carParkSaved = repository.findByVehiclePlateAndExitDateIsNull(carPark.getVehicle().getPlate());
 
-    assertThat(carParkSaved).contains(carPark.toEntity());
+    // Assert
+    assertThat(carParkSaved).isPresent();
 
   }
 
