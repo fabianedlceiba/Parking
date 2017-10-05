@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Month;
+import java.util.Optional;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -27,6 +28,7 @@ import co.com.ceiba.parking.domain.CarPark;
 import co.com.ceiba.parking.entities.DbCarPark;
 import co.com.ceiba.parking.exceptions.LimitExceededException;
 import co.com.ceiba.parking.exceptions.NoAvailableDayException;
+import co.com.ceiba.parking.exceptions.NotFoundException;
 import co.com.ceiba.parking.helpers.Constants;
 import co.com.ceiba.parking.repositories.CarParkRepository;
 import co.com.ceiba.parking.services.CarParkService;
@@ -92,7 +94,7 @@ public class CarParkServiceImplTest {
   @Test
   public void whenPlateStartWithAMonday_thenSaveCarPark() {
     // Arrange
-    LocalDateTime sunday = LocalDateTime.of(LocalDate.of(2017, Month.OCTOBER, 2), LocalTime.MAX);
+    LocalDateTime sunday = LocalDateTime.of(LocalDate.of(2017, Month.OCTOBER, 2), LocalTime.MIN);
     CarPark carPark = new CarParkBuilder().withCar("ARD23D").withEntryDate(sunday).build();
 
     // Act
@@ -162,6 +164,111 @@ public class CarParkServiceImplTest {
 
     // Assert
     assertThat(newCarPark.getId()).isEqualTo(DEFAULT_KEY);
+  }
+
+  @Test
+  public void whenUnParkCarBy2Hours_thenCalculate() {
+    // Arrange
+    String plate = "RST345";
+    int hours = 2;
+    LocalDateTime exitDate = now.plusHours(hours);
+    DbCarPark carPark = new DbCarParkBuilder().withCar(plate).withEntryDate(now).build();
+    when(carParkRepository.findByVehiclePlateAndExitDateIsNull(plate)).thenReturn(Optional.of(carPark));
+
+    // Act
+    Long value = carParkService.unpark(plate, exitDate);
+
+    // Assert
+    assertThat(value).isEqualTo(hours * carPark.getVehicle().getType().getHour());
+
+  }
+
+  @Test
+  public void whenUnParkCarBy2Days_thenCalculate() {
+    // Arrange
+    String plate = "RST345";
+    int days = 2;
+    LocalDateTime exitDate = now.plusDays(days);
+    DbCarPark carPark = new DbCarParkBuilder().withCar(plate).withEntryDate(now).build();
+    when(carParkRepository.findByVehiclePlateAndExitDateIsNull(plate)).thenReturn(Optional.of(carPark));
+
+    // Act
+    Long value = carParkService.unpark(plate, exitDate);
+
+    // Assert
+    assertThat(value).isEqualTo(days * carPark.getVehicle().getType().getDay());
+
+  }
+
+  @Test
+  public void whenUnParkCarBy2DaysAnd3Hours_thenCalculate() {
+    // Arrange
+    String plate = "RST345";
+    int days = 2;
+    int hours = 3;
+    LocalDateTime exitDate = now.plusDays(days).plusHours(3);
+    DbCarPark carPark = new DbCarParkBuilder().withCar(plate).withEntryDate(now).build();
+    int total = (days * carPark.getVehicle().getType().getDay()) + (hours * carPark.getVehicle().getType().getHour());
+    when(carParkRepository.findByVehiclePlateAndExitDateIsNull(plate)).thenReturn(Optional.of(carPark));
+
+    // Act
+    Long value = carParkService.unpark(plate, exitDate);
+
+    // Assert
+    assertThat(value).isEqualTo(total);
+
+  }
+
+  @Test
+  public void whenUnParkMotorcycle200By2Hours_thenCalculate() {
+    // Arrange
+    String plate = "RST347";
+    int hours = 2;
+    LocalDateTime exitDate = now.plusHours(hours);
+    DbCarPark carPark = new DbCarParkBuilder().withMotorcycle(plate, (short) 200).withEntryDate(now).build();
+    when(carParkRepository.findByVehiclePlateAndExitDateIsNull(plate)).thenReturn(Optional.of(carPark));
+
+    // Act
+    Long value = carParkService.unpark(plate, exitDate);
+
+    // Assert
+    assertThat(value).isEqualTo(hours * carPark.getVehicle().getType().getHour());
+
+  }
+
+  @Test
+  public void whenUnParkMotorcycle600By2Hours_thenCalculate() {
+    // Arrange
+    String plate = "RST347";
+    int hours = 4;
+    LocalDateTime exitDate = now.plusHours(hours);
+    DbCarPark carPark = new DbCarParkBuilder().withMotorcycle(plate, (short) 600).withEntryDate(now).build();
+    when(carParkRepository.findByVehiclePlateAndExitDateIsNull(plate)).thenReturn(Optional.of(carPark));
+
+    // Act
+    Long value = carParkService.unpark(plate, exitDate);
+
+    // Assert
+    assertThat(value).isEqualTo((hours * carPark.getVehicle().getType().getHour()) + Constants.MOTORCYCLE_ADITIONAL);
+
+  }
+
+  @Test
+  public void whenUnParkInvalidPlate_thenThrowNotFoundException() {
+    // Arrange
+    String plate = "RMS433";
+    int hours = 4;
+    LocalDateTime exitDate = now.plusHours(hours);
+    when(carParkRepository.findByVehiclePlateAndExitDateIsNull(plate)).thenReturn(Optional.ofNullable(null));
+
+    try {
+      carParkService.unpark(plate, exitDate);
+      fail();
+    }
+    catch (NotFoundException ex) {
+      assertThat(ex.getMessage()).isEqualTo(Constants.PLATE_NOT_FOUND);
+    }
+
   }
 
 }
