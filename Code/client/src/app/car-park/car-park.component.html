@@ -9,8 +9,8 @@
           </div>
           <div class="card-content">
             <div class="row">
-              <div class="col-lg-3 col-md-6 col-sm-6" *ngFor="let parkedVehicle of parkedVehicles; let i = index">
-                <app-card-vehicle [carPark]="parkedVehicle"></app-card-vehicle>
+              <div class="col-lg-3 col-md-6 col-sm-6" *ngFor="let parkedVehicle of parkedVehicles">
+                <app-card-vehicle [carPark]="parkedVehicle" (click)="onClickCard(parkedVehicle)"></app-card-vehicle>
               </div>
             </div>
           </div>
@@ -31,6 +31,29 @@
         </div>
       </div>
     </div>
+
+    <!-- Sart Modal -->
+    <div id="cardParkModal" class="modal fade">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">
+            <i class="material-icons">clear</i>
+          </button>
+            <h4 class="modal-title">Parqueo</h4>
+          </div>
+          <div class="modal-body">
+            <p>Far far away, behind
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default btn-simple" (click)="onClickSave()">Aceptar</button>
+            <button type="button" class="btn btn-danger btn-simple" data-dismiss="modal">Cerrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--  End Modal -->
 
   </div>
 </div>

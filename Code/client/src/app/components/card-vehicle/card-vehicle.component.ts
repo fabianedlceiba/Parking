@@ -25,4 +25,8 @@ export class CardVehicleComponent implements OnInit {
     this._carPark = carPark;
   }
 
+  public get available(): boolean {
+    return this._carPark.vehicle.plate == '------';
+  }
+
 }

@@ -8,11 +8,18 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
+import co.com.ceiba.parking.helpers.LocalDateTimeWrapper;
+
 @SpringBootApplication
 public class ApiApplication {
 
   public static void main(String[] args) {
     SpringApplication.run(ApiApplication.class, args);
+  }
+
+  @Bean
+  public LocalDateTimeWrapper localDateTimeWrapper() {
+    return new LocalDateTimeWrapper();
   }
 
   @Bean

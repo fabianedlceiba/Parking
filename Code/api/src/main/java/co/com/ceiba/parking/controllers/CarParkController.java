@@ -27,6 +27,9 @@ public class CarParkController {
   @Autowired
   private CarParkService carParkService;
 
+  @Autowired
+  private LocalDateTimeWrapper localDateTimeWrapper;
+
   @PostMapping(path = "/park")
   public ResponseEntity<CarPark> parkVehicle(@Valid @RequestBody CarPark carPark) {
 
@@ -38,8 +41,7 @@ public class CarParkController {
   @PutMapping(path = "/{plate}/park")
   public ResponseEntity<Long> unparkVehicle(@PathVariable String plate) {
 
-    Long amountToPaid = carParkService.unpark(plate, new LocalDateTimeWrapper().now());
-
+    Long amountToPaid = carParkService.unpark(plate, localDateTimeWrapper.now());
     return new ResponseEntity<>(amountToPaid, HttpStatus.OK);
   }
 
