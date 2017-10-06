@@ -91,17 +91,18 @@ public class CarParkServiceImpl implements CarParkService {
 
     EVehicleType type = carPark.getVehicle().getType();
     Duration duration = Duration.between(carPark.getEntryDate(), exitDate);
-    long hours = duration.toHours();
+
+    int hours = (int) Math.ceil((double) duration.toMinutes() / 60);
 
     Long result;
     if (hours <= MAX_HOURS) {
-      result = hours * type.getHour();
+      result = (long) (hours * type.getHour());
     }
     else {
 
-      int elapsedDays = (int) (hours / 24);
+      int elapsedDays = hours / 24;
 
-      result = (elapsedDays * type.getDay()) + (hours % 24) * type.getHour();
+      result = (long) (elapsedDays * type.getDay()) + ((hours % 24) * type.getHour());
     }
 
     if (type == EVehicleType.MOTORCYCLE && carPark.getVehicle().getCylinder() > MAX_CILYNDER) {
@@ -110,4 +111,5 @@ public class CarParkServiceImpl implements CarParkService {
 
     return result;
   }
+
 }

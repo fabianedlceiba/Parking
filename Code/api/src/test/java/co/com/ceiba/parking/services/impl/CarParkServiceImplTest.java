@@ -184,6 +184,22 @@ public class CarParkServiceImplTest {
   }
 
   @Test
+  public void whenUnParkCarBy45Minutes_thenCalculate() {
+    // Arrange
+    String plate = "RST345";
+    LocalDateTime exitDate = now.plusMinutes(45);
+    DbCarPark carPark = new DbCarParkBuilder().withCar(plate).withEntryDate(now).build();
+    when(carParkRepository.findByVehiclePlateAndExitDateIsNull(plate)).thenReturn(Optional.of(carPark));
+
+    // Act
+    Long value = carParkService.unpark(plate, exitDate);
+
+    // Assert
+    assertThat(value).isEqualTo(carPark.getVehicle().getType().getHour());
+
+  }
+
+  @Test
   public void whenUnParkCarBy2Days_thenCalculate() {
     // Arrange
     String plate = "RST345";
