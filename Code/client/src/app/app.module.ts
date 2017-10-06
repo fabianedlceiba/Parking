@@ -16,6 +16,8 @@ import { TypographyComponent } from './typography/typography.component';
 import { IconsComponent } from './icons/icons.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { UpgradeComponent } from './upgrade/upgrade.component';
+import { CarParkComponent } from './car-park/car-park.component';
+import { CardVehicleComponent } from './components';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,8 @@ import { UpgradeComponent } from './upgrade/upgrade.component';
     IconsComponent,
     NotificationsComponent,
     UpgradeComponent,
-
+    CarParkComponent,
+    CardVehicleComponent
   ],
   imports: [
     BrowserModule,
