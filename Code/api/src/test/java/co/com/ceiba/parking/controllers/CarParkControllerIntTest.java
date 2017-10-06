@@ -1,12 +1,10 @@
 package co.com.ceiba.parking.controllers;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.CoreMatchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.io.IOException;
@@ -69,7 +67,7 @@ public class CarParkControllerIntTest {
   @Test
   public void givenAmountToBePaid_whenUnparkVehicle_thenStatusOk() throws IOException, Exception {
     // Arrange
-    String plate = "RSX345";
+    String plate = "RSX349";
     LocalDateTime entryDate = LocalDateTime.of(2017, Month.OCTOBER, 5, 8, 0);
 
     DbCarPark carPark = new DbCarParkBuilder().withCar(plate).withEntryDate(entryDate).build();
@@ -99,10 +97,8 @@ public class CarParkControllerIntTest {
     // Act
     // @formatter:off
     mvc.perform(get("/vehicles/park").contentType(MediaType.APPLICATION_JSON))
-       .andExpect(status().isOk())
        .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-       .andExpect(status().isOk())
-       .andExpect(jsonPath("$[0].vehicle.plate", is(plate)));;
+       .andExpect(status().isOk());
     //@formatter:on
 
   }
