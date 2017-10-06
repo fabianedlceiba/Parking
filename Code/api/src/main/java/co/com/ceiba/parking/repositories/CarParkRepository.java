@@ -1,5 +1,6 @@
 package co.com.ceiba.parking.repositories;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.repository.CrudRepository;
@@ -28,5 +29,12 @@ public interface CarParkRepository extends CrudRepository<DbCarPark, Long> {
    * @return Number of the vehicles park.
    */
   int countByVehicleTypeAndExitDateIsNull(EVehicleType type);
+
+  /**
+   * Finds all vehicles that is in the car park.
+   * 
+   * @return All vehicles.
+   */
+  List<DbCarPark> findByExitDateIsNull();
 
 }

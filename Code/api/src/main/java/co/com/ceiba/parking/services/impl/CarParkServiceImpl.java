@@ -15,6 +15,8 @@ import static java.time.DayOfWeek.SUNDAY;
 import java.time.DayOfWeek;
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -79,7 +81,7 @@ public class CarParkServiceImpl implements CarParkService {
 
     DbCarPark carPark = carParkRepository.findByVehiclePlateAndExitDateIsNull(plate).orElseThrow(() -> new NotFoundException(PLATE_NOT_FOUND));
 
-    Long result = calculate(carPark, exitDate);
+    Long result = calculateAmountToBePaid(carPark, exitDate);
 
     carPark.setExitDate(exitDate);
     carParkRepository.save(carPark);
@@ -87,7 +89,16 @@ public class CarParkServiceImpl implements CarParkService {
     return result;
   }
 
-  private Long calculate(DbCarPark carPark, LocalDateTime exitDate) {
+  /**
+   * Calculate amount to be paid.
+   * 
+   * @param carPark
+   *          Vehicle.
+   * @param exitDate
+   *          Exit date.
+   * @return Amount to be paid.
+   */
+  private Long calculateAmountToBePaid(DbCarPark carPark, LocalDateTime exitDate) {
 
     EVehicleType type = carPark.getVehicle().getType();
     Duration duration = Duration.between(carPark.getEntryDate(), exitDate);
@@ -109,6 +120,18 @@ public class CarParkServiceImpl implements CarParkService {
       result += MOTORCYCLE_ADITIONAL;
     }
 
+    return result;
+  }
+
+  @Override
+  public List<CarPark> getAllParkedVehicles() {
+    List<DbCarPark> vehicles = carParkRepository.findByExitDateIsNull();
+    List<CarPark> result = new ArrayList<>(vehicles.size());
+    for (DbCarPark dbCarPark : vehicles) {
+      CarPark carPack = new CarPark();
+      carPack.fromEntity(dbCarPark);
+      result.add(carPack);
+    }
     return result;
   }
 

@@ -1,8 +1,12 @@
 package co.com.ceiba.parking.controllers;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.CoreMatchers.is;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.io.IOException;
@@ -23,6 +27,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import co.com.ceiba.parking.ApiApplication;
 import co.com.ceiba.parking.builders.CarParkBuilder;
+import co.com.ceiba.parking.builders.DbCarParkBuilder;
 import co.com.ceiba.parking.domain.CarPark;
 import co.com.ceiba.parking.entities.DbCarPark;
 import co.com.ceiba.parking.helpers.JsonHelper;
@@ -62,14 +67,14 @@ public class CarParkControllerIntTest {
   }
 
   @Test
-  public void givenAmountPaid_whenUnparkVehicle_thenStatusOk() throws IOException, Exception {
+  public void givenAmountToBePaid_whenUnparkVehicle_thenStatusOk() throws IOException, Exception {
     // Arrange
     String plate = "RSX345";
     LocalDateTime entryDate = LocalDateTime.of(2017, Month.OCTOBER, 5, 8, 0);
 
-    CarPark carPark = new CarParkBuilder().withCar(plate).withEntryDate(entryDate).build();
+    DbCarPark carPark = new DbCarParkBuilder().withCar(plate).withEntryDate(entryDate).build();
 
-    repository.save(carPark.toEntity());
+    repository.save(carPark);
 
     // Act
     // @formatter:off
@@ -82,6 +87,24 @@ public class CarParkControllerIntTest {
 
     // Assert
     assertThat(carParkSaved).isNotPresent();
+  }
+
+  @Test
+  public void givenParkedVehicles_whenGetParkedVehicles_thenStatusOk() throws IOException, Exception {
+    // Arrange
+    String plate = "RSX345";
+    DbCarPark carPark = new DbCarParkBuilder().withCar(plate).withEntryDate(LocalDateTime.now()).build();
+    repository.save(carPark);
+
+    // Act
+    // @formatter:off
+    mvc.perform(get("/vehicles/park").contentType(MediaType.APPLICATION_JSON))
+       .andExpect(status().isOk())
+       .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+       .andExpect(status().isOk())
+       .andExpect(jsonPath("$[0].vehicle.plate", is(plate)));;
+    //@formatter:on
+
   }
 
 }

@@ -2,6 +2,8 @@ package co.com.ceiba.parking.repositories;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.Test;
@@ -64,6 +66,34 @@ public class CarParkRepositoryTest {
 
     // Assert
     assertThat(count).isEqualTo(1);
+  }
+
+  @Test
+  public void whenFindByExitDateIsNull_thenReturnParkedVehicles() {
+    // Arrange
+    String plate = "RMS34D";
+    DbCarPark entity = new DbCarParkBuilder().withCar(plate).build();
+    entity = entityManager.persist(entity);
+
+    // Act
+    List<DbCarPark> parkedVehicles = carParkRepository.findByExitDateIsNull();
+
+    // Assert
+    assertThat(parkedVehicles).contains(entity);
+  }
+
+  @Test
+  public void whenFindByExitDateIsNull_thenReturnNothingParkedVehicles() {
+    // Arrange
+    String plate = "RMS34D";
+    DbCarPark entity = new DbCarParkBuilder().withCar(plate).withExitDate(LocalDateTime.now()).build();
+    entity = entityManager.persist(entity);
+
+    // Act
+    List<DbCarPark> parkedVehicles = carParkRepository.findByExitDateIsNull();
+
+    // Assert
+    assertThat(parkedVehicles).doesNotContain(entity);
   }
 
 }

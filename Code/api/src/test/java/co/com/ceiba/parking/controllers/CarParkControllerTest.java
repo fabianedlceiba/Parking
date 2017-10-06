@@ -1,18 +1,25 @@
 package co.com.ceiba.parking.controllers;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.Month;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -93,6 +100,47 @@ public class CarParkControllerTest {
     //@formatter:off
     mvc.perform(put("/vehicles/" + plate + "/park").contentType(APPLICATION_JSON))
       .andExpect(status().isOk())
+      .andDo(print());
+    
+    //@formatter:on
+
+  }
+
+  @Test
+  public void givenParkedVehicles_whenGetParkedVehicles_thenStatusOk() throws Exception {
+    // Arrange
+    String plate = "RDF23D";
+    CarPark carPark = new CarParkBuilder().withCar(plate).build();
+    List<CarPark> parkedVehicles = new ArrayList<>();
+    parkedVehicles.add(carPark);
+    given(service.getAllParkedVehicles()).willReturn(parkedVehicles);
+
+    // Act
+
+    //@formatter:off
+    mvc.perform(get("/vehicles/park").contentType(APPLICATION_JSON))
+      .andExpect(status().isOk())
+      .andExpect(content().contentTypeCompatibleWith(APPLICATION_JSON))
+      .andExpect(jsonPath("$", hasSize(1)))
+      .andExpect(jsonPath("$[0].vehicle.plate", is(plate)))
+      .andDo(print());
+    
+    //@formatter:on
+
+  }
+
+  @Test
+  public void givenParkedVehicles_whenGetNothingParkedVehicles_thenStatusOk() throws Exception {
+    // Arrange
+    given(service.getAllParkedVehicles()).willReturn(new ArrayList<>());
+
+    // Act
+
+    //@formatter:off
+    mvc.perform(get("/vehicles/park").contentType(APPLICATION_JSON))
+      .andExpect(status().isOk())
+      .andExpect(content().contentTypeCompatibleWith(APPLICATION_JSON))
+      .andExpect(jsonPath("$", empty()))
       .andDo(print());
     
     //@formatter:on

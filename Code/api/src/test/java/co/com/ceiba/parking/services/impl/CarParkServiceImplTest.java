@@ -11,6 +11,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Month;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.Before;
@@ -167,7 +169,7 @@ public class CarParkServiceImplTest {
   }
 
   @Test
-  public void whenUnParkCarBy2Hours_thenCalculate() {
+  public void whenUnParkCarBy2Hours_thenCalculateAmountToBePaid() {
     // Arrange
     String plate = "RST345";
     int hours = 2;
@@ -184,7 +186,7 @@ public class CarParkServiceImplTest {
   }
 
   @Test
-  public void whenUnParkCarBy45Minutes_thenCalculate() {
+  public void whenUnParkCarBy45Minutes_thenCalculateAmountToBePaid() {
     // Arrange
     String plate = "RST345";
     LocalDateTime exitDate = now.plusMinutes(45);
@@ -200,7 +202,7 @@ public class CarParkServiceImplTest {
   }
 
   @Test
-  public void whenUnParkCarBy2Days_thenCalculate() {
+  public void whenUnParkCarBy2Days_thenCalculateAmountToBePaid() {
     // Arrange
     String plate = "RST345";
     int days = 2;
@@ -217,7 +219,7 @@ public class CarParkServiceImplTest {
   }
 
   @Test
-  public void whenUnParkCarBy2DaysAnd3Hours_thenCalculate() {
+  public void whenUnParkCarBy2DaysAnd3Hours_thenCalculateAmountToBePaid() {
     // Arrange
     String plate = "RST345";
     int days = 2;
@@ -236,7 +238,7 @@ public class CarParkServiceImplTest {
   }
 
   @Test
-  public void whenUnParkMotorcycle200By2Hours_thenCalculate() {
+  public void whenUnParkMotorcycle200By2Hours_thenCalculateAmountToBePaid() {
     // Arrange
     String plate = "RST347";
     int hours = 2;
@@ -253,7 +255,7 @@ public class CarParkServiceImplTest {
   }
 
   @Test
-  public void whenUnParkMotorcycle600By2Hours_thenCalculate() {
+  public void whenUnParkMotorcycle600By2Hours_thenCalculateAmountToBePaid() {
     // Arrange
     String plate = "RST347";
     int hours = 4;
@@ -284,7 +286,23 @@ public class CarParkServiceImplTest {
     catch (NotFoundException ex) {
       assertThat(ex.getMessage()).isEqualTo(Constants.PLATE_NOT_FOUND);
     }
+  }
 
+  @Test
+  public void whenFindParkedVehicles_thenReturnParkedVehicles() {
+    // Arrange
+    String plate = "ARD23D";
+
+    List<DbCarPark> parkedDbVehicles = new ArrayList<>(1);
+    parkedDbVehicles.add(new DbCarParkBuilder().withCar(plate).withEntryDate(now).build());
+
+    when(carParkRepository.findByExitDateIsNull()).thenReturn(parkedDbVehicles);
+
+    // Act
+    List<CarPark> parkedVehicles = carParkService.getAllParkedVehicles();
+
+    // Assert
+    assertThat(parkedVehicles).hasSize(1);
   }
 
 }
