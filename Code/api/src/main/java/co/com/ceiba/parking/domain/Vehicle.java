@@ -48,11 +48,4 @@ public final class Vehicle {
     return dbVehicle;
   }
 
-  @JsonIgnore
-  public void fromEntity(DbVehicle entity) {
-    setPlate(entity.getPlate());
-    setType(entity.getType());
-    setCylinder(entity.getCylinder());
-  }
-
 }
