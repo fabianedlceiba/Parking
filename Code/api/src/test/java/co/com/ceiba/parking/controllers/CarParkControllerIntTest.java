@@ -2,9 +2,12 @@ package co.com.ceiba.parking.controllers;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.Optional;
 
 import org.junit.Test;
@@ -56,6 +59,29 @@ public class CarParkControllerIntTest {
     // Assert
     assertThat(carParkSaved).isPresent();
 
+  }
+
+  @Test
+  public void givenAmountPaid_whenUnparkVehicle_thenStatusOk() throws IOException, Exception {
+    // Arrange
+    String plate = "RSX345";
+    LocalDateTime entryDate = LocalDateTime.of(2017, Month.OCTOBER, 5, 8, 0);
+
+    CarPark carPark = new CarParkBuilder().withCar(plate).withEntryDate(entryDate).build();
+
+    repository.save(carPark.toEntity());
+
+    // Act
+    // @formatter:off
+    mvc.perform(put("/vehicles/" + plate + "/park").contentType(MediaType.APPLICATION_JSON))
+       .andExpect(status().isOk());
+    //@formatter:on
+
+    //@formatter:on
+    Optional<DbCarPark> carParkSaved = repository.findByVehiclePlateAndExitDateIsNull(plate);
+
+    // Assert
+    assertThat(carParkSaved).isNotPresent();
   }
 
 }

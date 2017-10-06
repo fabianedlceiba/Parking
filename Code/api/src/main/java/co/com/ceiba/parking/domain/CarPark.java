@@ -93,21 +93,4 @@ public final class CarPark {
     return dbCarPark;
   }
 
-  /**
-   * Convert from entity bean to domain bean.
-   * 
-   * @param entity
-   *          Entity bean.
-   */
-  @JsonIgnore
-  public void fromEntity(DbCarPark entity) {
-    setId(entity.getId());
-    setVehicle(new Vehicle());
-    getVehicle().fromEntity(entity.getVehicle());
-    setEntryDate(entity.getEntryDate());
-    setExitDate(entity.getExitDate());
-    setSlotNumber(entity.getSlotNumber());
-    setNotes(entity.getNotes());
-  }
-
 }
