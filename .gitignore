@@ -26,6 +26,7 @@ logs/
 .classpath
 *.launch
 node_modules/
+data/
 
 # IDE - VSCode
 .vscode/*
