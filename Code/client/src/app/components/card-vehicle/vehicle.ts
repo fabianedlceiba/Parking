@@ -1,12 +1,18 @@
 export class Vehicle {
 
-  private _plate: string;
-  private _cylinder: number;
-  private _type: number;
+  public plate: string;
+  public cylinder: number;
+  public type: number;
 
   constructor() { }
 
-  public get plate(): string {
+  public copy(vehicle: Vehicle) {
+    this.plate = vehicle.plate;
+    this.cylinder = vehicle.cylinder;
+    this.type = vehicle.type;
+  }
+
+ /* public get plate(): string {
     return this._plate;
   }
 
@@ -28,6 +34,6 @@ export class Vehicle {
 
   public set type(type: number) {
     this._type = type;
-  }
+  }*/
 
 }

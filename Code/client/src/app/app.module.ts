@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-//import { HttpClient } from '@'
+import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { AppRoutingModule } from './app.routing';
@@ -18,7 +18,7 @@ import { IconsComponent } from './icons/icons.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { UpgradeComponent } from './upgrade/upgrade.component';
 import { CarParkComponent } from './car-park/car-park.component';
-import { CardVehicleComponent } from './components';
+import { VehicleParkComponent, CardVehicleComponent } from './components';
 
 @NgModule({
   declarations: [
@@ -31,6 +31,7 @@ import { CardVehicleComponent } from './components';
     NotificationsComponent,
     UpgradeComponent,
     CarParkComponent,
+    VehicleParkComponent,
     CardVehicleComponent
   ],
   imports: [
@@ -39,6 +40,7 @@ import { CardVehicleComponent } from './components';
     HttpModule,
     ComponentsModule,
     RouterModule,
+    HttpClientModule,
     AppRoutingModule
   ],
   providers: [],

@@ -8,8 +8,9 @@ import java.time.LocalDateTime;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import co.com.ceiba.parking.entities.DbCarPark;
+import co.com.ceiba.parking.helpers.CustomLocalDateTimeSerializer;
 
 /**
  * Domain bean of the entity {@link DbCarPark}.
@@ -23,7 +24,9 @@ public final class CarPark {
 
   @NotNull(message = "El vehiculo no puede ser nulo")
   private Vehicle vehicle;
+  @JsonSerialize(using = CustomLocalDateTimeSerializer.class)
   private LocalDateTime entryDate;
+  @JsonSerialize(using = CustomLocalDateTimeSerializer.class)
   private LocalDateTime exitDate;
   private short slotNumber;
   private String notes;

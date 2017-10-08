@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
+import { environment } from '../../environments/environment';
 import { CarPark } from '../components';
 
 
@@ -12,49 +14,65 @@ declare var $: any;
 
 export class CarParkComponent implements OnInit, OnDestroy {
 
-  private _parkedVehicles: Array<CarPark> = [];
+  private _url: string;
   private _currentVehicle: CarPark;
+  private _selectedVehicle: CarPark;
+  private _amountToPaid: number;
 
-  constructor() {
-
-    for (let _i = 1; _i <= 10; _i++) {
-      const carPark: CarPark = new CarPark();
-      carPark.slotNumber = _i;
-      carPark.vehicle.plate = '------';
-
-      this._parkedVehicles.push(carPark);
-    }
-
+  constructor(private _http: HttpClient) {
+    this._currentVehicle = new CarPark();
+    this._url = environment.api + '/vehicles/park';
   }
 
   ngOnInit(): void {
-
   }
 
-  public get parkedVehicles(): Array<CarPark> {
-    return this._parkedVehicles;
+  public get currentVehicle(): CarPark {
+    return this._currentVehicle;
   }
 
-  public set parkedVehicles(parkedVehicles: Array<CarPark>) {
-    this._parkedVehicles = parkedVehicles;
+  public set currentVehicle(currentVehicle: CarPark) {
+    this._currentVehicle = currentVehicle;
   }
 
-  public onClickCard(parkedVehicle: CarPark): void {
-    this._currentVehicle = parkedVehicle;
-    $("#cardParkModal").appendTo("body").modal();
- 
-    console.info(parkedVehicle);
-    
+  public get amountToPaid(){
+    return this._amountToPaid;
   }
 
-  public onClickSave() {
-    this._currentVehicle.vehicle.plate = 'RRR443';
-    $("#cardParkModal").modal("hide");
-    this._currentVehicle = null;
+  public set amountToPaid(amountToPaid: number) {
+    this._amountToPaid = amountToPaid;
+  }
+
+  public park() {
+    this._http.post<CarPark>(this._url, this._currentVehicle)
+      .subscribe(carPark => {
+        this._selectedVehicle.copy(carPark);
+        $('#cardParkModal').modal("hide");
+        this._currentVehicle = new CarPark();
+      });
   }
 
   public ngOnDestroy(): void {
     $("body>#cardParkModal").remove();
+    $("body>#unparkModal").remove();
+  }
+
+  public onSelectedCar(selectedCar: CarPark) {
+    this._selectedVehicle = selectedCar;
+    this._currentVehicle.vehicle.type = selectedCar.vehicle.type;
+    this._currentVehicle.slotNumber = selectedCar.slotNumber;
+
+    if (this._selectedVehicle.available) {
+      $('#cardParkModal').appendTo("body").modal();
+    }
+    else {
+      const url = environment.api + '/vehicles/' + selectedCar.vehicle.plate + "/park";
+      this._http.put<number>(url, "").subscribe(amount => {
+        this._amountToPaid = amount;
+        selectedCar.restore();
+        $('#unparkModal').appendTo("body").modal();
+      });
+    } 
   }
 
 }

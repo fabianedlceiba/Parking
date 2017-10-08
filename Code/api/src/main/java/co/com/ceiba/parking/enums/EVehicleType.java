@@ -1,5 +1,7 @@
 package co.com.ceiba.parking.enums;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 /***
  * Enum with vehicle type.
  * 
@@ -8,14 +10,21 @@ package co.com.ceiba.parking.enums;
  */
 public enum EVehicleType {
 
-  CAR(1000, 8000), MOTORCYCLE(500, 6000);
+  CAR(0, 1000, 8000), MOTORCYCLE(1, 500, 6000);
 
+  private final int id;
   private final int hour;
   private final int day;
 
-  EVehicleType(int hour, int day) {
+  EVehicleType(int id, int hour, int day) {
+    this.id = id;
     this.hour = hour;
     this.day = day;
+  }
+
+  @JsonValue
+  public int getId() {
+    return this.id;
   }
 
   /**

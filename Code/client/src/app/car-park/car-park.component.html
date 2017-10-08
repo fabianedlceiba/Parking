@@ -1,53 +1,85 @@
 <div class="main-content">
   <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="card">
-          <div class="card-header" data-background-color="red">
-            <h4 class="title">Carros</h4>
-            <p class="category">Carros Parqueados</p>
-          </div>
-          <div class="card-content">
-            <div class="row">
-              <div class="col-lg-3 col-md-6 col-sm-6" *ngFor="let parkedVehicle of parkedVehicles">
-                <app-card-vehicle [carPark]="parkedVehicle" (click)="onClickCard(parkedVehicle)"></app-card-vehicle>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <div class="row">
-      <div class="col-md-12">
-        <div class="card">
-          <div class="card-header" data-background-color="red">
-            <h4 class="title">Motos</h4>
-            <p class="category">Motos Parqueados</p>
-          </div>
-          <div class="card-content">
-
-          </div>
-        </div>
-      </div>
-    </div>
+    <app-vehicle-park [title]="'Carros'" [subtitle]="'Carros Parqueados'" (selectedVehicle)="onSelectedCar($event)" [amount]="10"
+      [type]="0"></app-vehicle-park>
+    <app-vehicle-park [title]="'Motos'" [subtitle]="'Motos Parqueadas'" (selectedVehicle)="onSelectedCar($event)" [amount]="10"
+      [type]="1"></app-vehicle-park>
 
     <!-- Sart Modal -->
     <div id="cardParkModal" class="modal fade">
       <div class="modal-dialog">
         <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">
-            <i class="material-icons">clear</i>
-          </button>
-            <h4 class="modal-title">Parqueo</h4>
-          </div>
           <div class="modal-body">
-            <p>Far far away, behind
-            </p>
+            <form>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label id="lblPlate" class="form-label" for="txtPlate">Placa</label>
+                    <input id="txtPlate" type="text" class="form-control text-uppercase" [(ngModel)]="currentVehicle?.vehicle.plate" name="plate"
+                      maxlength="6">
+                  </div>
+                </div>
+              </div>
+              <div class="row" *ngIf="currentVehicle?.vehicle.type == 1">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label id="lblCylinder" class="form-label" for="txtCylinder">Cilindraje</label>
+                    <input id="txtCylinder" type="text" class="form-control" [(ngModel)]="currentVehicle?.vehicle.cylinder" maxlength="4" name="cylinder">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <textarea id="txtNotes" class="form-control text-uppercase" placeholder="Observaciones" rows="2" name="notes" [(ngModel)]="currentVehicle.notes"></textarea>
+                  </div>
+                </div>
+              </div>
+            </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default btn-simple" (click)="onClickSave()">Aceptar</button>
+            <button type="button" class="btn btn-success btn-simple" (click)="park()">Guardar</button>
+            <button type="button" class="btn btn-danger btn-simple" data-dismiss="modal">Cerrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--  End Modal -->
+
+    <!-- Sart Modal -->
+    <div id="unparkModal" class="modal fade">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body">
+            <form>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label id="lblAmountDue" class="form-label" for="txtAmountDue">Total</label>
+                    <label id="txtAmountDue" class="form-control text-uppercase">{{amountToPaid}}</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label id="lblAmountTendered" class="form-label" for="txtAmountTendered">Recibido</label>
+                    <input id="txtAmountTendered" #txtAmountTendered type="text" class="form-control" maxlength="4">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label id="lblChange" class="form-label" for="txtChange">Cambio</label>
+                    <label id="txtChange" class="form-control">{{amountToPaid}}</label>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
             <button type="button" class="btn btn-danger btn-simple" data-dismiss="modal">Cerrar</button>
           </div>
         </div>

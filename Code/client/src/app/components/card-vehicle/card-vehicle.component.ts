@@ -6,6 +6,7 @@ import { CarPark } from './car-park';
 @Component({
   selector: 'app-card-vehicle',
   templateUrl: './card-vehicle.component.html',
+  styles: ['.card-stats .card-header { cursor: pointer; }']
 })
 
 export class CardVehicleComponent implements OnInit {
@@ -24,9 +25,5 @@ export class CardVehicleComponent implements OnInit {
   public set carPark(carPark: CarPark) {
     this._carPark = carPark;
   }
-
-  public get available(): boolean {
-    return this._carPark.vehicle.plate == '------';
-  }
-
+  
 }
