@@ -1,9 +1,9 @@
 <div class="main-content">
   <div class="container-fluid">
 
-    <app-vehicle-park [title]="'Carros'" [subtitle]="'Carros Parqueados'" (selectedVehicle)="onSelectedCar($event)" [amount]="10"
+    <app-vehicle-park #cars [title]="'Carros'" [subtitle]="'Carros Parqueados'" (selectedVehicle)="onSelectedCar($event)" [amount]="20"
       [type]="0"></app-vehicle-park>
-    <app-vehicle-park [title]="'Motos'" [subtitle]="'Motos Parqueadas'" (selectedVehicle)="onSelectedCar($event)" [amount]="10"
+    <app-vehicle-park #motorcycles [title]="'Motos'" [subtitle]="'Motos Parqueadas'" (selectedVehicle)="onSelectedCar($event)" [amount]="10"
       [type]="1"></app-vehicle-park>
 
     <!-- Sart Modal -->
@@ -65,7 +65,7 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label id="lblAmountTendered" class="form-label" for="txtAmountTendered">Recibido</label>
-                    <input id="txtAmountTendered" #txtAmountTendered type="text" class="form-control" maxlength="4">
+                    <input id="txtAmountTendered" #txtAmountTendered type="text" class="form-control" maxlength="6">
                   </div>
                 </div>
               </div>
@@ -73,14 +73,14 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label id="lblChange" class="form-label" for="txtChange">Cambio</label>
-                    <label id="txtChange" class="form-control">{{amountToPaid}}</label>
+                    <label id="txtChange" class="form-control">{{txtAmountTendered.value - amountToPaid}}</label>
                   </div>
                 </div>
               </div>
             </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-danger btn-simple" data-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-danger btn-simple" (click)="unpark()">Cerrar</button>
           </div>
         </div>
       </div>

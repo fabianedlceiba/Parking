@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { environment } from '../../environments/environment';
-import { CarPark } from '../components';
+import { VehicleParkComponent, CarPark } from '../components';
 
 
 declare var $: any;
@@ -19,12 +19,21 @@ export class CarParkComponent implements OnInit, OnDestroy {
   private _selectedVehicle: CarPark;
   private _amountToPaid: number;
 
+  @ViewChild("cars")
+  private _cars: VehicleParkComponent;
+  @ViewChild('motorcycles')
+  private _motorcycles: VehicleParkComponent;
+
   constructor(private _http: HttpClient) {
     this._currentVehicle = new CarPark();
     this._url = environment.api + '/vehicles/park';
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
+    this._http.get<Array<CarPark>>(this._url).subscribe(data => {
+      this._cars.refresh(data);
+      this._motorcycles.refresh(data);
+    });
   }
 
   public get currentVehicle(): CarPark {
@@ -35,7 +44,7 @@ export class CarParkComponent implements OnInit, OnDestroy {
     this._currentVehicle = currentVehicle;
   }
 
-  public get amountToPaid(){
+  public get amountToPaid() {
     return this._amountToPaid;
   }
 
@@ -43,13 +52,19 @@ export class CarParkComponent implements OnInit, OnDestroy {
     this._amountToPaid = amountToPaid;
   }
 
-  public park() {
+  public park(): void {
     this._http.post<CarPark>(this._url, this._currentVehicle)
       .subscribe(carPark => {
         this._selectedVehicle.copy(carPark);
         $('#cardParkModal').modal("hide");
         this._currentVehicle = new CarPark();
+        this.showNotification('El vehiculo ha sido parqueado exitosamente.', 'warning');
       });
+  }
+
+  public unpark(): void {
+    $("#txtAmountTendered").val('');
+    $('#unparkModal').modal("hide");
   }
 
   public ngOnDestroy(): void {
@@ -57,13 +72,12 @@ export class CarParkComponent implements OnInit, OnDestroy {
     $("body>#unparkModal").remove();
   }
 
-  public onSelectedCar(selectedCar: CarPark) {
+  public onSelectedCar(selectedCar: CarPark): void {
     this._selectedVehicle = selectedCar;
-    this._currentVehicle.vehicle.type = selectedCar.vehicle.type;
-    this._currentVehicle.slotNumber = selectedCar.slotNumber;
 
     if (this._selectedVehicle.available) {
       $('#cardParkModal').appendTo("body").modal();
+      this._currentVehicle.copy(selectedCar);
     }
     else {
       const url = environment.api + '/vehicles/' + selectedCar.vehicle.plate + "/park";
@@ -72,7 +86,22 @@ export class CarParkComponent implements OnInit, OnDestroy {
         selectedCar.restore();
         $('#unparkModal').appendTo("body").modal();
       });
-    } 
+    }
+  }
+
+  public showNotification(message, type): void {
+    $.notify({
+      icon: "notifications",
+      message: message
+    },
+      {
+        type: type,
+        timer: 4000,
+        placement: {
+          from: 'bottom',
+          align: 'center'
+        }
+      });
   }
 
 }

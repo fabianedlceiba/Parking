@@ -21,7 +21,10 @@ export class VehicleParkComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    
+    this.buildVehicles();
+  }
+
+  private buildVehicles() : void {
     for (let _i = 1; _i <= this._amount; _i++) {
       const carPark: CarPark = new CarPark();
       carPark.slotNumber = _i;
@@ -30,7 +33,6 @@ export class VehicleParkComponent implements OnInit {
       carPark.notes = '';
       this._parkedVehicles.push(carPark);
     }
-
   }
 
   public get parkedVehicles(): Array<CarPark> {
@@ -85,4 +87,17 @@ export class VehicleParkComponent implements OnInit {
   public onClickCard(parkedVehicle: CarPark): void {
     this._selectedVehicle.emit(parkedVehicle);
   }
+
+  public refresh(parkedVehicles: Array<CarPark>) : void {
+    if (parkedVehicles.length > 0) {
+      const items: Array<CarPark> = parkedVehicles.filter(vehicle => vehicle.vehicle.type == this._type);
+      for(let parked of this._parkedVehicles) {
+        const findItem: CarPark = items.find(item => item.slotNumber == parked.slotNumber);
+        if (findItem) {
+          parked.copy(findItem);
+        }
+      }
+    }
+  }
+  
 }
