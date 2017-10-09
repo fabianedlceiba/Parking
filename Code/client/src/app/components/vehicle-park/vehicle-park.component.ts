@@ -8,8 +8,6 @@ import { CarPark } from '../card-vehicle/car-park';
 
 export class VehicleParkComponent implements OnInit {
 
-  private _title: string;
-  private _subtitle: string;
   private _amount: number;
   private _type: number;
   private _selectedVehicle: EventEmitter<CarPark>;
@@ -25,11 +23,11 @@ export class VehicleParkComponent implements OnInit {
   }
 
   private buildVehicles() : void {
-    for (let _i = 1; _i <= this._amount; _i++) {
+    for (let _i = 1; _i <= this.amount; _i++) {
       const carPark: CarPark = new CarPark();
       carPark.slotNumber = _i;
       carPark.vehicle.plate = '';
-      carPark.vehicle.type = this._type;
+      carPark.vehicle.type = this.type;
       carPark.notes = '';
       this._parkedVehicles.push(carPark);
     }
@@ -39,10 +37,6 @@ export class VehicleParkComponent implements OnInit {
     return this._parkedVehicles;
   }
 
-  public set parkedVehicles(parkedVehicles: Array<CarPark>) {
-    this._parkedVehicles = parkedVehicles;
-  }
-
   public get amount(): number {
     return this._amount;
   }
@@ -50,24 +44,6 @@ export class VehicleParkComponent implements OnInit {
   @Input()
   public set amount(amount: number) {
     this._amount = amount;
-  }
-
-  public get title(): string {
-    return this._title;
-  }
-
-  @Input()
-  public set title(title: string) {
-    this._title = title;
-  }
-
-  public get subtitle(): string {
-    return this._subtitle;
-  }
-
-  @Input()
-  public set subtitle(subtitle: string) {
-    this._subtitle = subtitle;
   }
 
   public get type(): number {
