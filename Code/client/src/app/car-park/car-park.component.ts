@@ -35,7 +35,6 @@ export class CarParkComponent implements OnInit, OnDestroy {
       this._motorcycles.refresh(data);
     },
       (err: HttpErrorResponse) => {
-        console.info(err);
         this.showNotification(err.error.message || err.statusText, 'danger');
       });
   }
@@ -115,4 +114,4 @@ export class CarParkComponent implements OnInit, OnDestroy {
       });
   }
 
-}
+}/* istanbul ignore next */

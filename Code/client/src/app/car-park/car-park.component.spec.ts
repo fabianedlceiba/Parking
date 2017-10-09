@@ -6,7 +6,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 
 
 import { CarParkComponent } from './car-park.component';
-import { VehicleParkComponent, CardVehicleComponent } from '../components';
+import { VehicleParkComponent, CardVehicleComponent, CarPark, Vehicle } from '../components';
 
 describe('CarParkComponent', () => {
 
@@ -39,8 +39,33 @@ describe('CarParkComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('ee', () => {
-    //httpMock.expectOne('http://localhost:8090/api/vehicles/park');
+  fit('should mark the vehicles were parked', () => {
+    fixture.detectChanges();
+
+    const request = httpMock.expectOne('http://localhost:8090/api/vehicles/park');
+    
+    const car: CarPark = new CarPark();
+    car.vehicle = new Vehicle();
+    car.vehicle.plate = 'RTD45E';
+    car.vehicle.type = 0;
+    car.entryDate = '12-10-2017 08:00 A.M'
+    car.slotNumber = 1;
+    
+    const motorcycle: CarPark = new CarPark();
+    motorcycle.vehicle = new Vehicle();
+    motorcycle.vehicle.plate = 'RTD45G';
+    motorcycle.vehicle.cylinder = 100;
+    motorcycle.vehicle.type = 1;
+    motorcycle.entryDate = '12-10-2017 09:00 A.M'
+    motorcycle.slotNumber = 1;
+
+    request.flush([car]);
+
+    fixture.detectChanges();
+
+    const parkedCar = fixture.debugElement.query(By.css("#cars app-card-vehicle"));
+
+    httpMock.verify();
   });
 
 });

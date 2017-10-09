@@ -2,6 +2,7 @@ export class Vehicle {
 
   public plate: string;
   public cylinder: number;
+  /*0. Car, 1. Motorcycle */
   public type: number;
 
   constructor() { }

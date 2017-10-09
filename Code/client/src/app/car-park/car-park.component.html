@@ -25,10 +25,10 @@
           </div>
           <div class="card-content">
             <div class="tab-content">
-              <div class="tab-pane active" id="cars">
+              <div id="cars" class="tab-pane active">
                 <app-vehicle-park #cars (selectedVehicle)="onSelectedCar($event)" [amount]="21" [type]="0"></app-vehicle-park>
               </div>
-              <div class="tab-pane" id="motorcycle">
+              <div id="motorcycle" class="tab-pane">
                 <app-vehicle-park #motorcycles (selectedVehicle)="onSelectedCar($event)"[amount]="12" [type]="1"></app-vehicle-park>
               </div>
             </div>
