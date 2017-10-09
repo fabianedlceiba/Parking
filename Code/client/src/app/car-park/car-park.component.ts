@@ -59,6 +59,10 @@ export class CarParkComponent implements OnInit, OnDestroy {
         $('#cardParkModal').modal("hide");
         this._currentVehicle = new CarPark();
         this.showNotification('El vehiculo ha sido parqueado exitosamente.', 'warning');
+      },
+      error => {
+        //console.info(error._body);
+        this.showNotification(error.message, 'danger');
       });
   }
 

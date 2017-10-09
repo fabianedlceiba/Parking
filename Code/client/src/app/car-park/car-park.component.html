@@ -1,23 +1,23 @@
 <div class="main-content">
   <div class="container-fluid">
 
-    <app-vehicle-park #cars [title]="'Carros'" [subtitle]="'Carros Parqueados'" (selectedVehicle)="onSelectedCar($event)" [amount]="20"
+    <app-vehicle-park #cars [title]="'Carros'" [subtitle]="'Carros Parqueados'" (selectedVehicle)="onSelectedCar($event)" [amount]="21"
       [type]="0"></app-vehicle-park>
-    <app-vehicle-park #motorcycles [title]="'Motos'" [subtitle]="'Motos Parqueadas'" (selectedVehicle)="onSelectedCar($event)" [amount]="10"
-      [type]="1"></app-vehicle-park>
+    <app-vehicle-park #motorcycles [title]="'Motos'" [subtitle]="'Motos Parqueadas'" (selectedVehicle)="onSelectedCar($event)"
+      [amount]="12" [type]="1"></app-vehicle-park>
 
     <!-- Sart Modal -->
     <div id="cardParkModal" class="modal fade">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-body">
-            <form>
+            <form #f="ngForm">
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
                     <label id="lblPlate" class="form-label" for="txtPlate">Placa</label>
                     <input id="txtPlate" type="text" class="form-control text-uppercase" [(ngModel)]="currentVehicle?.vehicle.plate" name="plate"
-                      maxlength="6">
+                      maxlength="6" required>
                   </div>
                 </div>
               </div>
@@ -25,21 +25,22 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label id="lblCylinder" class="form-label" for="txtCylinder">Cilindraje</label>
-                    <input id="txtCylinder" type="text" class="form-control" [(ngModel)]="currentVehicle?.vehicle.cylinder" maxlength="4" name="cylinder">
+                    <input id="txtCylinder" type="text" class="form-control" [(ngModel)]="currentVehicle?.vehicle.cylinder" maxlength="4" name="cylinder"
+                      required>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <textarea id="txtNotes" class="form-control text-uppercase" placeholder="Observaciones" rows="2" name="notes" [(ngModel)]="currentVehicle.notes"></textarea>
+                    <textarea id="txtNotes" class="form-control text-uppercase" placeholder="Observaciones" rows="5" name="notes" [(ngModel)]="currentVehicle.notes"></textarea>
                   </div>
                 </div>
               </div>
             </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-success" (click)="park()">Guardar</button>
+            <button type="button" class="btn btn-success" (click)="park()" [disabled]="!f.valid">Guardar</button>
             <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
           </div>
         </div>
@@ -80,7 +81,7 @@
             </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-danger" (click)="unpark()">Cerrar</button>
+            <button type="button" class="btn btn-danger" (click)="unpark()" [disabled]="txtAmountTendered.value - amountToPaid < 0">Cerrar</button>
           </div>
         </div>
       </div>

@@ -11,6 +11,8 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import co.com.ceiba.parking.exceptions.LimitExceededException;
+
 @ControllerAdvice
 public class ControllerExceptionHandler {
 
@@ -18,5 +20,10 @@ public class ControllerExceptionHandler {
   public ResponseEntity<List<String>> handleException(MethodArgumentNotValidException ex) {
     List<String> errors = ex.getBindingResult().getAllErrors().stream().map(ObjectError::getDefaultMessage).collect(toList());
     return new ResponseEntity<>(errors, HttpStatus.UNPROCESSABLE_ENTITY);
+  }
+
+  @ExceptionHandler(LimitExceededException.class)
+  public ResponseEntity<String> handleLimitExceededException(LimitExceededException ex) {
+    return new ResponseEntity<>("{ 'message' : '" + ex.getMessage() + "'}", HttpStatus.BAD_REQUEST);
   }
 }
