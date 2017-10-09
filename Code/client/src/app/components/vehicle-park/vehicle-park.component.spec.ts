@@ -13,8 +13,10 @@ describe('VehicleParkComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [VehicleParkComponent,
-        CardVehicleComponent]
+      declarations: [
+        VehicleParkComponent,
+        CardVehicleComponent
+      ]
     })
       .compileComponents();
   }));
@@ -91,6 +93,20 @@ describe('VehicleParkComponent', () => {
     const appCardElements = fixture.debugElement.query(By.css('app-card-vehicle .card-header'));
     
     expect(appCardElements.attributes['data-background-color']).toEqual('green');
+  });
+
+  it('should return selected vehicle', () => {
+    
+    component.amount = 1;
+    component.type = 1;
+    fixture.detectChanges();
+
+    const appCardElement = fixture.debugElement.query(By.css('app-card-vehicle')).nativeElement;
+    appCardElement.click();
+    
+    component.selectedVehicle.subscribe(evt => {
+      expect(evt.slotNumber).toEqual(1);
+    })
   });
 
 

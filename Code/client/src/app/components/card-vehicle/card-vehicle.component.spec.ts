@@ -20,7 +20,6 @@ describe('CardVehicleComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(CardVehicleComponent);
     component = fixture.componentInstance;
-    //fixture.detectChanges();
   });
 
   it('should create', () => {

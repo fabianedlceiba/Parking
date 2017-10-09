@@ -26,12 +26,10 @@
           <div class="card-content">
             <div class="tab-content">
               <div class="tab-pane active" id="cars">
-                <app-vehicle-park #cars [title]="'Carros'" [subtitle]="'Carros Parqueados'" (selectedVehicle)="onSelectedCar($event)" [amount]="21"
-                  [type]="0"></app-vehicle-park>
+                <app-vehicle-park #cars (selectedVehicle)="onSelectedCar($event)" [amount]="21" [type]="0"></app-vehicle-park>
               </div>
               <div class="tab-pane" id="motorcycle">
-                <app-vehicle-park #motorcycles [title]="'Motos'" [subtitle]="'Motos Parqueadas'" (selectedVehicle)="onSelectedCar($event)"
-                  [amount]="12" [type]="1"></app-vehicle-park>
+                <app-vehicle-park #motorcycles (selectedVehicle)="onSelectedCar($event)"[amount]="12" [type]="1"></app-vehicle-park>
               </div>
             </div>
           </div>
