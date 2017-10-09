@@ -90,7 +90,7 @@ public class CarParkControllerIntTest {
   @Test
   public void givenParkedVehicles_whenGetParkedVehicles_thenStatusOk() throws IOException, Exception {
     // Arrange
-    String plate = "RSX345";
+    String plate = "RSX348";
     DbCarPark carPark = new DbCarParkBuilder().withCar(plate).withEntryDate(LocalDateTime.now()).build();
     repository.save(carPark);
 

@@ -1,0 +1,92 @@
+<div class="main-content">
+  <div class="container-fluid">
+
+    <app-vehicle-park #cars [title]="'Carros'" [subtitle]="'Carros Parqueados'" (selectedVehicle)="onSelectedCar($event)" [amount]="21"
+      [type]="0"></app-vehicle-park>
+    <app-vehicle-park #motorcycles [title]="'Motos'" [subtitle]="'Motos Parqueadas'" (selectedVehicle)="onSelectedCar($event)"
+      [amount]="12" [type]="1"></app-vehicle-park>
+
+    <!-- Sart Modal -->
+    <div id="cardParkModal" class="modal fade">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body">
+            <form #f="ngForm">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label id="lblPlate" class="form-label" for="txtPlate">Placa</label>
+                    <input id="txtPlate" type="text" class="form-control text-uppercase" [(ngModel)]="currentVehicle?.vehicle.plate" name="plate"
+                      maxlength="6" required>
+                  </div>
+                </div>
+              </div>
+              <div class="row" *ngIf="currentVehicle?.vehicle.type == 1">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label id="lblCylinder" class="form-label" for="txtCylinder">Cilindraje</label>
+                    <input id="txtCylinder" type="text" class="form-control" [(ngModel)]="currentVehicle?.vehicle.cylinder" maxlength="4" name="cylinder"
+                      required>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <textarea id="txtNotes" class="form-control text-uppercase" placeholder="Observaciones" rows="5" name="notes" [(ngModel)]="currentVehicle.notes"></textarea>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success" (click)="park()" [disabled]="!f.valid">Guardar</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--  End Modal -->
+
+    <!-- Sart Modal -->
+    <div id="unparkModal" class="modal fade">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body">
+            <form>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label id="lblAmountDue" class="form-label" for="txtAmountDue">Total</label>
+                    <label id="txtAmountDue" class="form-control text-uppercase">{{amountToPaid}}</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label id="lblAmountTendered" class="form-label" for="txtAmountTendered">Recibido</label>
+                    <input id="txtAmountTendered" #txtAmountTendered type="text" class="form-control" maxlength="6">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label id="lblChange" class="form-label" for="txtChange">Cambio</label>
+                    <label id="txtChange" class="form-control">{{txtAmountTendered.value - amountToPaid}}</label>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" (click)="unpark()" [disabled]="txtAmountTendered.value - amountToPaid < 0">Cerrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--  End Modal -->
+
+  </div>
+</div>

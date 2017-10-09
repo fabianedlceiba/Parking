@@ -8,6 +8,7 @@ dist/
 /docs/build
 bin/
 coverage/
+jacoco/
 
 # Log file
 *.log
@@ -20,12 +21,12 @@ build/
 .idea/
 out/
 .gradle/
-gradle/
 logs/
 .project
 .classpath
 *.launch
 node_modules/
+data/
 
 # IDE - VSCode
 .vscode/*

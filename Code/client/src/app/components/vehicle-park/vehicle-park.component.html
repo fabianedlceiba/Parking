@@ -1,0 +1,17 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header" data-background-color="green">
+        <h4 class="title">{{title}}</h4>
+        <p class="category">{{subtitle}}</p>
+      </div>
+      <div class="card-content">
+        <div class="row">
+          <div class="col-lg-4 col-md-6 col-sm-6" *ngFor="let parkedVehicle of parkedVehicles">
+            <app-card-vehicle [carPark]="parkedVehicle" (click)="onClickCard(parkedVehicle)"></app-card-vehicle>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
