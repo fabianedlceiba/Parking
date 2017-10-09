@@ -29,7 +29,13 @@ describe('CardVehicleComponent', () => {
   it('should display the entry date of the car', () => {
     
     const carPark: CarPark = new CarPark();
+    carPark.vehicle = new Vehicle();
+    carPark.vehicle.plate = 'RMS34D';
+    carPark.vehicle.cylinder = 100;
+    carPark.vehicle.type = 1;
+    carPark.slotNumber = 1;
     carPark.entryDate = '01-10-2017 12:00 P.M'
+    carPark.notes = 'Test';
     component.carPark = carPark;
     fixture.detectChanges();
 

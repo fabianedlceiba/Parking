@@ -76,4 +76,4 @@ export class VehicleParkComponent implements OnInit {
     }
   }
   
-}
+}/* istanbul ignore next */

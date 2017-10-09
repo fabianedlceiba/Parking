@@ -10,16 +10,17 @@ import { CarPark } from './car-park';
 })
 
 export class CardVehicleComponent {
-  
+
   private _carPark: CarPark;
 
   public get carPark(): CarPark {
     return this._carPark;
   }
 
+
   @Input()
   public set carPark(carPark: CarPark) {
     this._carPark = carPark;
   }
-  
-}
+
+}/* istanbul ignore next */
