@@ -11,7 +11,6 @@ import { ComponentsModule } from './components/components.module';
 import { AppComponent } from './app.component';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { NotificationsComponent } from './notifications/notifications.component';
 import { CarParkComponent } from './car-park/car-park.component';
 import { VehicleParkComponent, CardVehicleComponent } from './components';
 
@@ -19,7 +18,6 @@ import { VehicleParkComponent, CardVehicleComponent } from './components';
   declarations: [
     AppComponent,
     DashboardComponent,
-    NotificationsComponent,
     CarParkComponent,
     VehicleParkComponent,
     CardVehicleComponent

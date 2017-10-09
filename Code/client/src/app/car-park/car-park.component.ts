@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { environment } from '../../environments/environment';
 import { VehicleParkComponent, CarPark } from '../components';
@@ -33,7 +33,11 @@ export class CarParkComponent implements OnInit, OnDestroy {
     this._http.get<Array<CarPark>>(this._url).subscribe(data => {
       this._cars.refresh(data);
       this._motorcycles.refresh(data);
-    });
+    },
+      (err: HttpErrorResponse) => {
+        console.info(err);
+        this.showNotification(err.error.message || err.statusText, 'danger');
+      });
   }
 
   public get currentVehicle(): CarPark {
@@ -60,9 +64,9 @@ export class CarParkComponent implements OnInit, OnDestroy {
         this._currentVehicle = new CarPark();
         this.showNotification('El vehiculo ha sido parqueado exitosamente.', 'warning');
       },
-      error => {
-        //console.info(error._body);
-        this.showNotification(error.message, 'danger');
+      (err: HttpErrorResponse) => {
+        $('#cardParkModal').modal("hide");
+        this.showNotification(err.error.message || err.statusText, 'danger');
       });
   }
 
@@ -89,7 +93,10 @@ export class CarParkComponent implements OnInit, OnDestroy {
         this._amountToPaid = amount;
         selectedCar.restore();
         $('#unparkModal').appendTo("body").modal();
-      });
+      },
+        (err: HttpErrorResponse) => {
+          this.showNotification(err.error.message || err.statusText, 'danger');
+        });
     }
   }
 
