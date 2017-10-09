@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { CarPark } from './car-park';
 
@@ -9,13 +9,9 @@ import { CarPark } from './car-park';
   styles: ['.card-stats .card-header { cursor: pointer; }']
 })
 
-export class CardVehicleComponent implements OnInit {
+export class CardVehicleComponent {
   
   private _carPark: CarPark;
-
-  ngOnInit(): void {
-
-  }
 
   public get carPark(): CarPark {
     return this._carPark;
