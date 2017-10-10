@@ -34,9 +34,7 @@ export class CarParkComponent implements OnInit, OnDestroy {
       this._cars.refresh(data);
       this._motorcycles.refresh(data);
     },
-      (err: HttpErrorResponse) => {
-        this.showNotification(err.error.message || err.statusText, 'danger');
-      });
+      (err: HttpErrorResponse) => this.showNotification(err.error.message || err.statusText, 'danger'));
   }
 
   public get currentVehicle(): CarPark {

@@ -2,7 +2,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from "@angular/platform-browser";
 import { DebugElement } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpErrorResponse } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 
@@ -76,12 +75,10 @@ describe('CarParkComponent', () => {
     fixture.detectChanges();
     const request = httpMock.expectOne('http://localhost:8090/api/vehicles/park');
 
-    request.flush(new HttpErrorResponse({
-      error:  {
-        message: 'Error'
-      },
-      status: 500
-    }));
+    request.flush('error', {
+      status: 500,
+      statusText: 'Internal Error'
+    });
 
     httpMock.verify();
 
