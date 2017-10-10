@@ -14,6 +14,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { CarParkComponent } from './car-park/car-park.component';
 import { VehicleParkComponent, CardVehicleComponent } from './components';
 
+import { CarParkService } from './car-park/car-park.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +33,9 @@ import { VehicleParkComponent, CardVehicleComponent } from './components';
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    CarParkService
+  ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

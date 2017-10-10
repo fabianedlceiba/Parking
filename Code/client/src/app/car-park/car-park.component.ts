@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 
 import { environment } from '../../environments/environment';
 import { VehicleParkComponent, CarPark } from '../components';
-
+import { CarParkService } from './car-park.service';
 
 declare var $: any;
 
@@ -14,23 +14,22 @@ declare var $: any;
 
 export class CarParkComponent implements OnInit, OnDestroy {
 
-  private _url: string;
   private _currentVehicle: CarPark;
   private _selectedVehicle: CarPark;
   private _amountToPaid: number;
 
   @ViewChild("cars")
   private _cars: VehicleParkComponent;
+
   @ViewChild('motorcycles')
   private _motorcycles: VehicleParkComponent;
 
-  constructor(private _http: HttpClient) {
+  constructor(private _carParkService: CarParkService) {
     this._currentVehicle = new CarPark();
-    this._url = environment.api + '/vehicles/park';
   }
 
   public ngOnInit(): void {
-    this._http.get<Array<CarPark>>(this._url).subscribe(data => {
+    this._carParkService.getParkedVehicles().subscribe(data => {
       this._cars.refresh(data);
       this._motorcycles.refresh(data);
     },
@@ -50,9 +49,8 @@ export class CarParkComponent implements OnInit, OnDestroy {
   }
 
   public park(): void {
-    this._http.post<CarPark>(this._url, this._currentVehicle)
-    .subscribe(carPark => {
-        console.log(this._currentVehicle);
+    this._carParkService.park(this._currentVehicle)
+      .subscribe(carPark => {
         this._selectedVehicle.copy(carPark);
         $('#cardParkModal').modal("hide");
         this._currentVehicle = new CarPark();
@@ -82,8 +80,7 @@ export class CarParkComponent implements OnInit, OnDestroy {
       this._currentVehicle.copy(selectedCar);
     }
     else {
-      const url = environment.api + '/vehicles/' + selectedCar.vehicle.plate + "/park";
-      this._http.put<number>(url, "").subscribe(amount => {
+      this._carParkService.unpark(selectedCar.vehicle.plate).subscribe(amount => {
         this._amountToPaid = amount;
         selectedCar.restore();
         $('#unparkModal').appendTo("body").modal();
