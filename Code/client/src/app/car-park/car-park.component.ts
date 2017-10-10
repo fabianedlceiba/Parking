@@ -41,10 +41,6 @@ export class CarParkComponent implements OnInit, OnDestroy {
     return this._currentVehicle;
   }
 
-  public set currentVehicle(currentVehicle: CarPark) {
-    this._currentVehicle = currentVehicle;
-  }
-
   public get amountToPaid() {
     return this._amountToPaid;
   }
@@ -55,7 +51,8 @@ export class CarParkComponent implements OnInit, OnDestroy {
 
   public park(): void {
     this._http.post<CarPark>(this._url, this._currentVehicle)
-      .subscribe(carPark => {
+    .subscribe(carPark => {
+        console.log(this._currentVehicle);
         this._selectedVehicle.copy(carPark);
         $('#cardParkModal').modal("hide");
         this._currentVehicle = new CarPark();

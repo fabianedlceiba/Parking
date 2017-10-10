@@ -1,8 +1,8 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { By } from "@angular/platform-browser";
 import { DebugElement } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 
 import { CarParkComponent } from './car-park.component';
@@ -52,14 +52,6 @@ describe('CarParkComponent', () => {
     car.entryDate = '12-10-2017 08:00 A.M'
     car.slotNumber = 1;
 
-    const motorcycle: CarPark = new CarPark();
-    motorcycle.vehicle = new Vehicle();
-    motorcycle.vehicle.plate = 'RTD45G';
-    motorcycle.vehicle.cylinder = 100;
-    motorcycle.vehicle.type = 1;
-    motorcycle.entryDate = '12-10-2017 09:00 A.M'
-    motorcycle.slotNumber = 1;
-
     request.flush([car]);
 
     fixture.detectChanges();
@@ -72,6 +64,7 @@ describe('CarParkComponent', () => {
   });
 
   it('should show notification with error message', () => {
+
     fixture.detectChanges();
     const request = httpMock.expectOne('http://localhost:8090/api/vehicles/park');
 
@@ -83,5 +76,39 @@ describe('CarParkComponent', () => {
     httpMock.verify();
 
   });
+
+  fit('should park motorcycle', fakeAsync(() => {
+
+    const plate: string = 'RTF456';
+
+    fixture.detectChanges();
+    tick();
+
+    const cardVehicle = fixture.debugElement.query(By.css("#motorcycles app-card-vehicle")).nativeElement;
+    cardVehicle.click();
+
+    fixture.detectChanges();
+    tick();
+
+    const txtPlate = fixture.debugElement.query(By.css('#txtPlate')).nativeElement;
+    txtPlate.value = plate;
+    txtPlate.dispatchEvent(new Event('input'));
+    
+    const txtCylinder = fixture.debugElement.query(By.css('#txtCylinder')).nativeElement;
+    txtCylinder.value = 100;
+    txtCylinder.dispatchEvent(new Event('input'));
+        
+    fixture.detectChanges();
+    tick();
+
+    const request = httpMock.expectOne('http://localhost:8090/api/vehicles/park');
+    
+    request.flush(new CarPark());
+
+    const btnPark = fixture.debugElement.query(By.css('#btnPark')).nativeElement;
+    btnPark.click();
+    
+
+  }));
 
 });

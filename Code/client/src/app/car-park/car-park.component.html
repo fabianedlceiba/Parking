@@ -14,7 +14,7 @@
                     </a>
                   </li>
                   <li class="">
-                    <a href="#motorcycle" data-toggle="tab">
+                    <a href="#motorcycles" data-toggle="tab">
                       <i class="material-icons">motorcycle</i>Motos
                       <div class="ripple-container"></div>
                     </a>
@@ -28,7 +28,7 @@
               <div id="cars" class="tab-pane active">
                 <app-vehicle-park #cars (selectedVehicle)="onSelectedCar($event)" [amount]="21" [type]="0"></app-vehicle-park>
               </div>
-              <div id="motorcycle" class="tab-pane">
+              <div id="motorcycles" class="tab-pane">
                 <app-vehicle-park #motorcycles (selectedVehicle)="onSelectedCar($event)"[amount]="12" [type]="1"></app-vehicle-park>
               </div>
             </div>
@@ -57,8 +57,8 @@
             <div class="col-md-12">
               <div class="form-group">
                 <label id="lblCylinder" class="form-label" for="txtCylinder">Cilindraje</label>
-                <input id="txtCylinder" type="text" class="form-control" [(ngModel)]="currentVehicle?.vehicle.cylinder" maxlength="4" name="cylinder"
-                  required>
+                <input id="txtCylinder" type="text" class="form-control" [(ngModel)]="currentVehicle?.vehicle.cylinder" 
+                      maxlength="4" name="cylinder" required pattern="[0-9]{1,4}">
               </div>
             </div>
           </div>
@@ -72,7 +72,7 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-success" (click)="park()" [disabled]="!f.valid">Guardar</button>
+        <button id="btnPark" type="button" class="btn btn-success" (click)="park()" [disabled]="!f.valid">Guardar</button>
         <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
       </div>
     </div>
@@ -98,7 +98,7 @@
             <div class="col-md-12">
               <div class="form-group">
                 <label id="lblAmountTendered" class="form-label" for="txtAmountTendered">Recibido</label>
-                <input id="txtAmountTendered" #txtAmountTendered type="text" class="form-control" maxlength="6">
+                <input id="txtAmountTendered" #txtAmountTendered type="text" class="form-control" maxlength="6" pattern="[0-9]{1,6}">
               </div>
             </div>
           </div>
