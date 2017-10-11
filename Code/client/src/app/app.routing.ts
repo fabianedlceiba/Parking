@@ -8,7 +8,7 @@ import { CarParkComponent } from './car-park/car-park.component';
 
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'car-park', component: CarParkComponent},
+  { path: 'car-park', component: CarParkComponent },
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
 ];
 
@@ -16,7 +16,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     BrowserModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes, { useHash: true })
   ],
   exports: [
   ],

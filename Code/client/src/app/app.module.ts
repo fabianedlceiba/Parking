@@ -15,6 +15,7 @@ import { CarParkComponent } from './car-park/car-park.component';
 import { VehicleParkComponent, CardVehicleComponent } from './components';
 
 import { CarParkService } from './car-park/car-park.service';
+import { OnlyNumberDirective } from './directives';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { CarParkService } from './car-park/car-park.service';
     DashboardComponent,
     CarParkComponent,
     VehicleParkComponent,
-    CardVehicleComponent
+    CardVehicleComponent,
+    OnlyNumberDirective
   ],
   imports: [
     BrowserModule,
